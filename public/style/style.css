@@ -477,6 +477,12 @@ a {
           box-sizing: border-box;
 }
 
+.btn-sm {
+  padding: 5px;
+  border-radius: 20px;
+  border: 2px solid;
+}
+
 .help-bubble {
   background-color: #030233;
   color: #ffffff;
