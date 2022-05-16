@@ -1,0 +1,88 @@
+<div class="container-interface d-flex column align-center ">
+    <h3>Générer données</h3>
+    <div class="generate-section">
+        <h4>Source</h4>
+        <div class="generate-section__row">
+            <input type="radio" name="source" id="mono" checked>
+            <label for="mono">MonoDate</label>
+            <span class="file-name">XXXXX.tif</span>
+        </div>
+        <div class="generate-section__row">
+            <input type="radio" name="source" id="multi">
+            <label for="multi">MultiDate</label>
+        </div>
+        <div class="generate-section__parametres">
+            <h5>Paramètres</h5>
+            <div class="d-flex align-center generate-section__row">
+                <label for="mask">Sélectionner un masque</label>
+                <input type="file" name="mask" id="mask">
+                <div class="help-bubble">?</div>
+            </div>
+            <div class="d-flex align-center generate-section__row">
+                <input type="checkbox" name="mask-individual" id="mask-individual">
+                <label for="mask-individual">Utiliser les masques individuels pour la construction de séquence</label>
+                <div class="help-bubble">?</div>
+            </div>
+        </div>
+    </div>
+    <div class="generate-section">
+        <h4>Echantillonage</h4>
+        <div class="generate-section__row">
+            <input type="radio" name="echantillonage" id="intervalle" checked>
+            <label for="intervalle">Par intervalle</label>
+        </div>
+        <div class="generate-section__row">
+            <input type="radio" name="echantillonage" id="random">
+            <label for="random">Random</label>
+        </div>
+        <div class="generate-section__parametres">
+            <h5>Paramètres</h5>
+            <div class="d-flex align-center generate-section__row"> 
+                <input type="radio" name="echantillon-param" id="comptage" checked>
+                <label for="comptage">Par comptage</label>
+                <span>
+                    <input type="number" name="number-comptage" id="number-comptage">
+                    <label for="number-comptage">/56064</label>
+                </span>
+                <div class="help-bubble">?</div>
+            </div>
+           <div class="d-flex align-center generate-section__row">
+               <input type="radio" name="echantillon-param" id="pourcentage">
+               <label for="pourcentage">Par pourcentage</label>
+               <span>
+                   <input type="number" name="number-pourcentage" id="number-pourcentage" disabled>
+                   <label for="number-pourcentage">%</label>
+               </span>
+           </div>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-second">Annuler</button>
+        <button id="btn-modal" class="btn btn-primary">Générer</button>
+    </div>
+    <div class="infobar d-flex space-around align-center">
+        <span>Sauvegarde auto</span>
+        <span class="projet-name">Projet : XXX</span>
+        <span>Date début projet : XXX</span>
+    </div>
+
+    <!--Modal window-->
+    <div class="modal-window">
+        <div class="modal-window__content d-flex column align-center space-between">
+            <div class="onglet"><span>Nom de données</span><span class="btn-close">X</span></div>
+            <div>
+                <p>Choisir un nom de données</p>
+                <input type="text" name="dataname" id="dataname" value="XXXXXX.tif (mono)">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-anim-red">
+                    <span>Annuler</span>
+                </button>
+                <button class="btn btn-anim-green">
+                    <span><a href="/datapanel">Valider</a></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

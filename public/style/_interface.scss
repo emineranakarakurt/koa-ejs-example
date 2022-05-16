@@ -1,11 +1,133 @@
 @import "variables";
 
-body{
+.container{
     background-image: url('../images/iss065e385549.jpg');
+    min-height: calc(100vh - 80px);
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+}
+.container-interface{
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
+    padding: 50px 0;
+    
+    .image-import
+    {
+        &-duo{
+            width: 100%;
+        }
+        &__view{
+            .image{
+                box-sizing: border-box;
+                border: 15px solid $bleu-30;
+                border-bottom: none;
+                border-radius: 11px 11px 0 0;
+                img{
+                    width: 580px;
+                    height: auto;
+                }
+            }
+            .toolbar{
+                background-color: $bleu-saphir;
+                border-radius: 0 0 11px 11px;
+                padding: 5px 25px;
+            }
+        }
+        &__button{
+            margin-top: 50px;
+        }
+    }
+    .infobar{
+        background-color: $blanc;
+        border-top: 1px solid $bleu-nuit;
+        position: absolute;
+        top: calc(100% - 5vh);
+        height: 5vh;
+        width: calc(100% - 235px);
+        color: $bleu-nuit;
+        .projet-name{
+            font-weight: bolder;
+        }
+    }
 
+    .generate-section{
+        background-color: $bleu-ciel;
+        width: calc(100% - 30px);
+        margin: 15px;
+        padding: 15px;
+        border-radius: 20px;
+        &__parametres{
+            background-color: $blanc;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin-top: 25px;
+            h5{
+                font-weight: normal;
+                margin: 0 0 10px 0;
+
+            }
+        }
+        &__row{
+            margin-bottom: 10px;
+            .file-name{
+                color: $bleu-nuit;
+                background-color: $blanc;
+                margin-left: 5px;
+                border-radius: 5px;
+                padding: 0 5px;
+            }
+            input{
+                margin: 0 5px;
+            }
+            input#mask{
+                border: 1px solid $bleu-nuit;
+                border-radius: 11px;
+            }
+           
+        }
+    }
+    .modal-window{
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        &__content {
+            background-color: $blanc;
+            margin: auto;
+            border: 3px solid $bleu-nuit;
+            width: 80%;
+            top: 40%;
+            left: 10%;
+            position: absolute;
+            border-radius: 20px;
+            .onglet{
+                background-color: $bleu-nuit;
+                width: 100%;
+                color: $blanc;
+                border-radius: 15px 15px 0 0;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+            }
+            input#dataname{
+                min-width: 730px;
+                height: 40px;
+            }
+            .btn-group{
+                margin-top: 35px;
+                margin-bottom: 15px;
+            }
+          }
+    }
+}
+body{
     header{
         nav{
             background-color: $bleu-nuit;
@@ -17,9 +139,10 @@ body{
                     img{
                         width: 110px;
                         height: 110px;
-                        z-index: 2;
+                        
                     }
                     align-self: flex-start;
+                    z-index: 5;
                 }
 
                 &-links{

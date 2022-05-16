@@ -88,3 +88,103 @@ a{
         left: 15px;
     }
 }
+.btn{
+    text-align: center;
+    border-radius: 45px;
+    padding: 15px 55px;
+    border: none;
+    &-primary{
+        background-color: $bleu-nuit;
+        color: $blanc;
+        border: 3px solid $bleu-nuit;
+    }
+    &-second{
+        background-color: $blanc;
+        color: $bleu-nuit;
+        border: 3px solid $bleu-nuit;
+        box-sizing: border-box;
+    }
+}
+.help-bubble{
+    background-color: $bleu-nuit;
+    color: $blanc;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    margin: 0 5px;
+}
+.btn-close{
+    background-color: $rouge;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 100px;
+    top: 10px;
+    line-height: 20px;
+    cursor: pointer;
+}    
+input[type=text], input[type=number]{
+    border: 1px solid $bleu-nuit;
+    border-radius: 20px;
+}
+.btn-anim{
+    &-green{
+            position: relative;
+            background: $vert;
+            padding: 0.5rem 1rem;
+            border: none;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            overflow: hidden;
+        &:before {
+            --size: 0;
+            content: '';
+            position: absolute;
+            left: var(--x);
+            top: var(--y);
+            width: var(--size);
+            height: var(--size);
+            background: radial-gradient(circle, #39c4068a 0%, #38811b 100%);
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease;
+        }
+        &:hover:before {
+            --size: 200px;
+        }
+        & span{
+            position: relative;
+        }
+    }
+    &-red{
+        position: relative;
+        background: $rouge;
+        padding: 0.5rem 1rem;
+        border: none;
+        color: white;
+        cursor: pointer;
+        outline: none;
+        overflow: hidden;
+    &:before {
+        --size: 0;
+        content: '';
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        height: var(--size);
+        background: radial-gradient(circle, #af08088a 0%, #811b1b 100%);
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease;
+    }
+    &:hover:before {
+        --size: 200px;
+    }
+    & span{
+        position: relative;
+    }
+}
+}

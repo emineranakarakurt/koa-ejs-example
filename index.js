@@ -47,7 +47,18 @@ router.get("/openproject", async (ctx) => {
 router.get("/createproject", async (ctx) => {
   await ctx.render("createproject");
 });
-
+router.get("/projectsolo", async (ctx) => {
+  await ctx.render("projectsolo");
+});
+router.get("/projectduo", async (ctx) => {
+  await ctx.render("projectduo");
+});
+router.get("/generatedata", async (ctx) => {
+  await ctx.render("generatedata");
+});
+router.get("/datapanel", async (ctx) => {
+  await ctx.render("datapanel");
+});
 app
   .use(logger())
   .use(bodyParser())
