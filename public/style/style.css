@@ -238,6 +238,37 @@
   margin-bottom: 15px;
 }
 
+.container-interface .datapanel {
+  height: 95%;
+  width: 95%;
+  border: 2px solid #030233;
+  margin: auto;
+}
+
+.container-interface .datapanel-content {
+  width: 100%;
+}
+
+.container-interface .datapanel-content__left .accordeon {
+  line-height: 35px;
+  width: 50vw;
+}
+
+.container-interface .datapanel-content__left .accordeon-title {
+  background-color: #ffffff;
+  border: 2px solid #030233;
+  margin: 0;
+  padding-left: 5px;
+}
+
+.container-interface .datapanel-content__left .accordeon-content {
+  background-color: #B3C7EF;
+}
+
+.container-interface .datapanel-content__left .accordeon-content p {
+  margin: 0;
+}
+
 body header nav {
   background-color: #030233;
   min-height: 80px;
