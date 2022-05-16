@@ -1,0 +1,9 @@
+@import "variables";
+.accueil{
+    &-didactiel__slider{
+        background-color: $blanc;
+        width: 100%;
+        padding: 15px;
+        color: $bleu-nuit;
+    }
+}

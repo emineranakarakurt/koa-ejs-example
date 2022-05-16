@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap");
+.accueil-langue__selection h3 {
+  text-align: center;
+}
+
+.accueil-langue__selection ul {
+  margin-top: 20px;
+}
+
+.accueil-langue__selection ul li {
+  margin-bottom: 15px;
+  padding: 15px 35px;
+}
+
+.accueil-langue__selection ul li img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.accueil-langue__selection ul li:hover {
+  background: linear-gradient(189.43deg, #064bd4 7.12%, rgba(0, 70, 202, 0.54) 240.92%);
+  border-radius: 47px;
+}
+
+.accueil-langue__selection ul .selected {
+  background: linear-gradient(189.43deg, #030233 7.12%, #064bd4 240.92%);
+  border-radius: 47px;
+}
+
+.accueil-didactiel__slider {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 15px;
+  color: #030233;
+}
+
+.accueil-connexion__form {
+  min-width: 400px;
+}
+
+.accueil-connexion__form h3 {
+  text-align: center;
+}
+
+.accueil-connexion__form form .form-label {
+  border: none;
+  background-color: #ffffff;
+  border-radius: 21px;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.accueil-connexion__form form .form-label::-webkit-input-placeholder {
+  color: #030233;
+}
+
+.accueil-connexion__form form .form-label:-ms-input-placeholder {
+  color: #030233;
+}
+
+.accueil-connexion__form form .form-label::-ms-input-placeholder {
+  color: #030233;
+}
+
+.accueil-connexion__form form .form-label::placeholder {
+  color: #030233;
+}
+
+.accueil-connexion__form form div {
+  width: 100%;
+}
+
+.accueil-connexion__form form button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #030233;
+  border-radius: 29px;
+  padding: 15px;
+  border: none;
+  color: #ffffff;
+}
+
+.accueil-connexion__form p a {
+  color: #030233;
+}
+
+.accueil-connexion__form .form-links a {
+  display: block;
+}
+
+.accueil-connexion a:hover {
+  text-decoration: underline;
+}
+
+body {
+  background-image: url("../images/iss065e385549.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+body header nav {
+  background-color: #030233;
+  min-height: 80px;
+  height: 5vh;
+  color: #ffffff;
+}
+
+body header nav .nav-logo {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+body header nav .nav-logo img {
+  width: 110px;
+  height: 110px;
+  z-index: 2;
+}
+
+body header nav .nav-links ul {
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+}
+
+body header nav .nav-links ul li {
+  margin: 0 15px;
+}
+
+body header nav .nav-support img {
+  margin: 0 10px;
+}
+
+body main {
+  min-height: calc(100% - 80px);
+}
+
+body main aside {
+  background-color: #ffffff;
+  -webkit-box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
+          box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  min-width: 235px;
+  z-index: -1;
+  padding-top: 40px;
+}
+
+body main aside .aside-data {
+  background-color: #0046CACC;
+}
+
+body main aside .aside-image, body main aside .aside-image, body main aside .aside-info, body main aside .aside-birdview {
+  background-color: #336BD5A8;
+}
+
+body main aside div {
+  width: 100%;
+  color: #ffffff;
+  min-height: 180px;
+  border-radius: 4px;
+  padding: 0 15px;
+}
+
+body main .preproject {
+  background: rgba(255, 255, 255, 0.37);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  border-radius: 21px;
+  color: #030233;
+  margin: auto;
+  width: 30vw;
+  min-height: 350px;
+  padding: 15px;
+}
+
+body main .preproject-row {
+  margin-bottom: 20px;
+}
+
+body main .preproject-row img {
+  vertical-align: middle;
+  margin-right: 35px;
+}
+
+body main .preproject-row a {
+  color: #030233;
+}
+
+body main .preproject-row.openproject {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 15px 0;
+  border-radius: 45px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 1em;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.container {
+  background-image: url("../images/iss065e385549.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.align-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.justify-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.space-around {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.justify-self-start {
+  justify-self: flex-start;
+}
+
+.justify-start {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.align-start {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.align-self-center {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.accueil {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.37);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  border-radius: 21px;
+  width: 60vw;
+  min-height: 350px;
+  padding: 15px;
+}
+
+.accueil .logo {
+  width: 110px;
+  height: 110px;
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+/*# sourceMappingURL=style.css.map */

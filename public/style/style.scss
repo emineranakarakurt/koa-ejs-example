@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap');
+@import "variables";
+@import "langue";
+@import "didactiel";
+@import "connexion";
+@import "interface";
+
+//Style général
+* {
+    box-sizing: border-box;
+}
+    
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1em;
+}
+ul{
+    padding: 0;
+    li{
+        list-style-type: none;
+    }
+}
+a{
+    text-decoration: none;
+    color: $blanc;
+}
+.container{
+    background-image: url('../images/iss065e385549.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+.d-flex{
+    display: flex;
+}
+.align-center{
+    align-items: center;
+}
+.justify-center{
+    justify-content: center;
+}
+.column{
+    flex-direction: column;
+}
+.space-around{
+    justify-content: space-around;
+}
+.space-between{
+    justify-content: space-between;
+}
+.justify-self-start{
+    justify-self: flex-start;
+}
+.justify-start{
+    justify-content: flex-start;
+}
+.align-start{
+    align-items: flex-start;
+}
+.align-self-center{
+    align-self: center;
+}
+///////////////////////// 
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accueil{
+    color: $blanc;
+    background: rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur(8px);
+    border-radius: 21px;
+    width: 60vw;
+    min-height: 350px;
+    padding: 15px;
+    .logo{
+        width: 110px;
+        height: 110px;
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "koa-ejs-example",
+  "description": "",
+  "author": {
+    "name": "Bogdan Luca",
+    "email": "bogdan@codesandbox.io"
+  },
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "4.3.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "oidc-provider": "6.31.1",
+    "path": "0.12.7"
+  },
+  "keywords": []
+}

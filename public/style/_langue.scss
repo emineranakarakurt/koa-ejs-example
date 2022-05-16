@@ -1,0 +1,30 @@
+@import "variables";
+
+.accueil {
+    &-langue{
+        &__selection{
+            h3{
+                text-align: center;
+            }
+            ul{
+                margin-top: 20px;
+                li{
+                    margin-bottom: 15px;
+                    padding: 15px 35px;
+                    img{
+                        vertical-align: middle;
+                        margin-right: 5px;
+                    }
+                }
+                li:hover{
+                    background: linear-gradient(189.43deg, $bleu-saphir 7.12%, rgba(0, 70, 202, 0.54) 240.92%);
+                    border-radius: 47px;
+                }
+                .selected{
+                    background: linear-gradient(189.43deg, $bleu-nuit 7.12%, $bleu-saphir 240.92%);
+                    border-radius: 47px;
+                }
+            }
+        }
+    }
+}
