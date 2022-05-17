@@ -37,9 +37,17 @@ render(app, {
 });
 
 
-
 router.get("/", async (ctx) => {
-  await ctx.render("page2");
+  await ctx.render("langue");
+});
+router.get("/didactiel", async (ctx) => {
+  await ctx.render("didactiel");
+});
+router.get("/connexion", async (ctx) => {
+  await ctx.render("connexion");
+});
+router.get("/openorcreate", async (ctx) => {
+  await ctx.render("openorcreate");
 });
 router.get("/openproject", async (ctx) => {
   await ctx.render("openproject");
@@ -59,6 +67,10 @@ router.get("/generatedata", async (ctx) => {
 router.get("/datapanel", async (ctx) => {
   await ctx.render("datapanel");
 });
+router.get("/classification", async (ctx) => {
+  await ctx.render("classification");
+});
+
 app
   .use(logger())
   .use(bodyParser())

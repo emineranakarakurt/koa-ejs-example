@@ -3,29 +3,29 @@
         <div class="datapanel-content d-flex space-around align-start">
             <div class="datapanel-content__left">
                 <div class="accordeon">
-                    <div class="accordeon-title">Band 1</div>
+                    <div class="accordeon-title d-flex space-between align-center"><p>Band 1</p><i class="fa-solid fa-chevron-down"></i></div>
                     <div class="accordeon-content">
                         <p>Minimum : 0.0</p>
                         <p>Maximum : 255.0</p>
                         <p>Means : 115.1105</p>
                         <p>StDev : 3325.8886</p>
-                        <button class="name-band">Nommer la bande</button>
+                        <button class="btn-sm btn-primary name-band">Nommer la bande</button>
                     </div>
-                    <div class="accordeon-title">Band 2</div>
+                    <div class="accordeon-title d-flex space-between align-center"><p>Band 2</p><i class="fa-solid fa-chevron-down"></i></div>
                     <div class="accordeon-content">
                         <p>Minimum : 0.0</p>
                         <p>Maximum : 255.0</p>
                         <p>Means : 115.1105</p>
                         <p>StDev : 3325.8886</p>
-                        <button class="name-band">Nommer la bande</button>
+                        <button class="btn-sm btn-primary name-band">Nommer la bande</button>
                     </div>
-                    <div class="accordeon-title">Band 3</div>
+                    <div class="accordeon-title d-flex space-between align-center"><p>Band 3</p><i class="fa-solid fa-chevron-down"></i></div>
                     <div class="accordeon-content">
                         <p>Minimum : 0.0</p>
                         <p>Maximum : 255.0</p>
                         <p>Means : 115.1105</p>
                         <p>StDev : 3325.8886</p>
-                        <button class="name-band">Nommer la bande</button>
+                        <button class="btn-sm btn-primary name-band">Nommer la bande</button>
                     </div>
                 </div>
                 <div class="class-number">
@@ -46,17 +46,98 @@
             </div>
         </div>
         <div class="datapanel-menu">
-            <button class="btn-sm btn-second">Voir les données</button>
+            <button class="btn-sm btn-second btn-modal">Voir les données</button>
             <button class="btn-sm btn-second">Graphique données</button>
-            <button class="btn-sm btn-second">Prétraitement</button>
-            <button class="btn-sm btn-second">Voir les commentaires</button>
+            <button class="btn-sm btn-second btn-modal">Prétraitement</button>
+            <button class="btn-sm btn-second btn-modal">Voir les commentaires</button>
             <button class="btn-sm btn-second">Filtrer les attributs</button>
-            <button class="btn-sm btn-primary">Classifier</button>
+            <a href="/classification"><button class="btn-sm btn-primary">Classifier</button></a>
         </div>
     </div>
     <div class="infobar d-flex space-around align-center">
         <span>Sauvegarde auto</span>
         <span class="projet-name">Projet : XXX</span>
         <span>Date début projet : XXX</span>
+    </div>
+
+
+     <!--Modal window-->
+     <div class="modal-window">
+        <div class="modal-window__content d-flex column align-center space-between">
+            <div class="onglet"><span>Voir les données</span><span class="btn-close">X</span></div>
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Band 1</th>
+                            <th>Band 2</th>
+                            <th>Band 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn-anim-red btn">
+                <span>Effacer l'objet sélectionné</span></button>
+        </div>
+    </div>
+    <div class="modal-window">
+        <div class="modal-window__content d-flex column align-center space-between">
+            <div class="onglet"><span>Nom de données</span><span class="btn-close">X</span></div>
+            <div class="accordeon">
+                <div class="accordeon-title d-flex space-between align-center"><p>Filtrer</p><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordeon-content">
+                    <p>Nombre d'objets supprimé : XX</p>
+                </div>
+                <div class="accordeon-title d-flex space-between align-center"><p>Attribution</p><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordeon-content">
+                    <div>
+                        <input type="radio" name="attribution" id="signification">
+                        <label for="signification">Par signification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="attribution" id="median">
+                        <label for="median">Par médiane</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="attribution" id="extrapolation">
+                        <label for="extrapolation">Par extrapolation</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="attribution" id="value">
+                        <label for="value">Par valeur : </label>
+                        <input type="number" value="0.00">
+                    </div>
+                </div>
+                <div class="accordeon-title d-flex space-between align-center"><p>Normalisation</p><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordeon-content">
+                    <div>
+                        <input type="radio" name="normalisation" id="minmax">
+                        <label for="minmax">Par MesureurMinMax</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="normalisation" id="standard">
+                        <label for="standard">Par MesureurStandard</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="normalisation" id="absmax">
+                        <label for="absmax">Par MesureurAbsMax</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="normalisation" id="borneminmax">
+                        <label for="borneminmax">Borne MinMax</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-window">
+        <div class="modal-window__content d-flex column align-center space-between">
+            <div class="onglet"><span>Voir les données</span><span class="btn-close">X</span></div>
+            <div class="commentaires"></div>
+        </div>
     </div>
 </div>

@@ -57,7 +57,7 @@
         width: calc(100% - 30px);
         margin: 15px;
         padding: 15px;
-        border-radius: 20px;
+        border-radius: 11px;
         &__parametres{
             background-color: $blanc;
             padding: 10px 15px;
@@ -88,44 +88,6 @@
            
         }
     }
-    .modal-window{
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        &__content {
-            background-color: $blanc;
-            margin: auto;
-            border: 3px solid $bleu-nuit;
-            width: 80%;
-            top: 40%;
-            left: 10%;
-            position: absolute;
-            border-radius: 20px;
-            .onglet{
-                background-color: $bleu-nuit;
-                width: 100%;
-                color: $blanc;
-                border-radius: 15px 15px 0 0;
-                height: 40px;
-                text-align: center;
-                line-height: 40px;
-            }
-            input#dataname{
-                min-width: 730px;
-                height: 40px;
-            }
-            .btn-group{
-                margin-top: 35px;
-                margin-bottom: 15px;
-            }
-          }
-    }
     .datapanel{
         height: 95%;
         width: 95%;
@@ -134,23 +96,90 @@
         &-content{
             width: 100%;
             &__left{
-                .accordeon{
-                    line-height: 35px;
-                    width: 50vw;
-                    &-title{
-                        background-color: $blanc;
-                        border: 2px solid $bleu-nuit;
-                        margin: 0;
-                        padding-left: 5px;
-                    }
-                    &-content{
-                        background-color: $bleu-ciel;
-                        p{
-                            margin: 0;
-                        }
-                    }
+                .class-number{
+                    background-color: $bleu-nuit;
+                    border-radius: 20px;
+                    color: $blanc;
+                    line-height: 45px;
+                    padding-left: 25px;
                 }
             }
+            &__right{
+                .actual-relation{
+                    color: $blanc;
+                    background-color: $bleu-nuit;
+                    border-radius: 20px;
+                    padding: 10px 20px;
+                }
+                .histogram{
+                    background-color: $bleu-ciel;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        
+    }
+    .classification{
+        height: 95%;
+        width: 95%;
+        border: 2px solid $bleu-nuit;
+        margin: auto;
+        &-section{
+            background-color: $bleu-ciel;
+            width: calc(100% - 30px);
+            margin: 15px;
+            padding: 15px;
+            border-radius: 11px;
+            select{
+                border: 1.5px solid #030233;
+                padding: 0.5rem 1rem;
+                background-color: #fff;
+                border-radius: 21px;
+                -webkit-border-radius: 21px;
+                -moz-border-radius: 21px;
+                -ms-border-radius: 21px;
+                -o-border-radius: 21px;
+                margin-bottom: 15px;
+                width: 30%;
+            }
+        }
+        div{
+            input{
+                border: none;
+            }
+            margin-bottom: 10px;
+            button{
+                margin-left: 5px;
+            }
+            a{
+                color: $bleu-nuit;
+                text-decoration: underline;
+            }
+            h3+a{
+                margin-left: 15px;
+            }
+        }
+    }
+    .modal-window{
+        
+        .accordeon{
+            margin-top: 50px;
+            max-height: 400px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        button{
+            margin-bottom: 10px;
+        }
+        .commentaires{
+            border: 1px solid;
+            border-radius: 20px;
+            width: 50%;
+            min-height: 400px;
+            margin: 15px;
         }
     }
 }

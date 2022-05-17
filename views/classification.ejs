@@ -1,0 +1,108 @@
+<div class="container-interface">
+    <div class="classification d-flex column align-center">
+        <div class="classification-section d-flex column align-start space-between">
+            <h3>Méthode</h3>
+            <select name="method" id="method">
+                <optgroup label="Single Method">
+                    <option value="">K-MEANS</option>
+                    <option value="">GW-K-MEANS</option>
+                    <option value="">LW-K-MEANS</option>
+                    <option value="">FUZZY-C-MEANS</option>
+                    <option value="">FUZZY-GW-C-MEANS</option>
+                    <option value="">FUZZY-LW-C-MEANS</option>
+                    <option value="">COBWEB</option>
+                    <option value="">S.O.M</option>
+                    <option value="">PERCEPTION</option>
+                    <option value="">EM</option>
+                    <option value="">CURE</option>
+                    <option value="">GNG</option>
+                    <option value="">K-MEDOIDS</option>
+                </optgroup>
+                <optgroup label="Multi strategies">
+                    <option value="">SAMARAH</option>
+                    <option value="">Multi strategy & Multi source</option>
+                </optgroup>
+                <optgroup label="Others">
+                    <option value="">Attribute weighting</option>
+                    <option value="">Voting approach</option>
+                    <option value="">Import from file</option>
+                </optgroup>
+            </select>
+            <button class="btn-sm btn-primary">En savoir plus sur la méthode</button>
+        </div>
+        <div class="classification-section">
+            <div class="d-flex align-center">
+                <h3>Paramètres de classification</h3>
+                <a href="#">Ouvrir des paramètres</a>
+            </div>
+            <div>
+                <label for="seeds">Graines (seeds)</label>
+                <input type="number" name="parameters" id="seeds" value="10">
+            </div>
+            <div>
+                <label for="steps">Etapes (steps)</label>
+                <input type="number" name="parameters" id="steps" value="10">
+            </div>
+            <div class="d-flex align-center">
+                <span>
+                    <input type="checkbox" name="seeds-parameters" id="seeds-parameters">
+                    <label for="seeds-parameters">Utiliser des graines présélectionnées</label>
+                </span>
+                <button class="btn-sm btn-primary">
+                    Sélectionner des centres initiaux
+                </button>
+                <div class="help-bubble">?</div>
+            </div>
+            <a href="#">Enregistrer les paramètres</a>
+        </div>
+        <div class="classification-section ">
+            <h3>Sélection d'attributs et configuration des poids</h3>
+            <div class="d-flex align-center">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom de l'attribut</th>
+                            <th>Poids de l'attribut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="attribut-name1" id="band1">
+                                <label for="band1">Bande 1</label>
+                            </td>
+                            <td>
+                                <input type="number" name="attribut-weight1" id="weight1" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="attribut-name2" id="band2">
+                                <label for="band2">Bande 2</label>
+                            </td>
+                            <td>
+                                <input type="number" name="attribut-weight2" id="weight2" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="attribut-name3" id="band3">
+                                <label for="band3">Bande 3</label>
+                            </td>
+                            <td>
+                                <input type="number" name="attribut-weight3" id="weight3" value="1">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="help-bubble">?</div>
+            </div>
+        </div>
+        <button class="btn btn-primary">Classifier</button>
+    </div>
+    <div class="infobar d-flex space-around align-center">
+        <span>Sauvegarde auto</span>
+        <span class="projet-name">Projet : XXX</span>
+        <span>Date début projet : XXX</span>
+    </div>
+</div>
