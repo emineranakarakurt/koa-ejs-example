@@ -1,0 +1,52 @@
+<div class="container-interface">
+    <div class="results">
+        <div class="onglet d-flex space-around align-center"><a href="/classification"><i class="fa-solid fa-circle-arrow-left"></i></a><span>Data panel</span><span class="btn-close">X</span></div>
+        <div class="results-content">
+        <div class="results-col d-flex">
+            <div class="results-col__left d-flex column">
+                <div class="d-flex align-end">
+                    <div class="toolbar d-flex column">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        <i class="fa-solid fa-magnifying-glass-minus"></i>
+                    </div>
+                    <div class="stats-results">
+                        <h2>Historique</h2>
+                    </div>
+                </div>
+                <div class="d-flex align-start space-between">
+                    <div class="view-mode">
+                        <h3>View mode</h3>
+                        <div>
+                            <input type="radio" name="viewmode" id="normal">
+                            <label for="normal">Normal Mode</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="viewmode" id="multi">
+                            <label for="multi">Multi Mode</label>
+                        </div>
+                    </div>
+                    <div class="button-menu d-flex align-start space-around">
+                        <a href="/results-projection-panel"><button class="btn-sm btn-second projection-panel">Projection Panel</button></a>
+                        <a href="/results-centroids"><button class="btn-sm btn-second centroids">Centroids</button></a>
+                        <a href="/results-cardinality"><button class="btn-sm btn-second cardinality">Cardinality</button></a>
+                        <a href="/results-scatter-plot"><button class="btn-sm btn-second scatter-plot">Scatter plot</button></a>
+                        <a href="/results-evaluation"><button class="btn-sm btn-second evaluation">Evaluation</button></a>
+                        <a href="/results-similarity"><button class="btn-sm btn-second heat-map">Similarity HeatMap</button></a>
+                        <a href="/results-weights"><button class="btn-sm btn-second weight">Weights</button></a>
+                        <a href="/results-image"><button class="btn-sm btn-second image-result">Image result</button></a>
+                        <a href="/results-historique"><button class="btn-sm btn-primary historique">Historique</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="results-col__right">
+                <%- include('./partials/results-right-side'); %>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="infobar d-flex space-around align-center">
+        <span>Sauvegarde auto</span>
+        <span class="projet-name">Projet : XXX</span>
+        <span>Date début projet : XXX</span>
+    </div>
+</div>

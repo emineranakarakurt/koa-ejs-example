@@ -18,12 +18,12 @@
 }
 
 .accueil-langue__selection ul li:hover {
-  background: linear-gradient(189.43deg, #064bd4 7.12%, rgba(0, 70, 202, 0.54) 240.92%);
+  background: linear-gradient(189.43deg, #2D75EE 7.12%, rgba(0, 70, 202, 0.54) 240.92%);
   border-radius: 47px;
 }
 
 .accueil-langue__selection ul .selected {
-  background: linear-gradient(189.43deg, #030233 7.12%, #064bd4 240.92%);
+  background: linear-gradient(189.43deg, #030233 7.12%, #2D75EE 240.92%);
   border-radius: 47px;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .container-interface .image-import__view .toolbar {
-  background-color: #064bd4;
+  background-color: #2D75EE;
   border-radius: 0 0 11px 11px;
   padding: 5px 25px;
 }
@@ -140,6 +140,7 @@
   border-top: 1px solid #030233;
   position: absolute;
   top: calc(100% - 5vh);
+  bottom: 0;
   height: 5vh;
   width: calc(100% - 235px);
   color: #030233;
@@ -195,6 +196,26 @@
   width: 95%;
   border: 2px solid #030233;
   margin: auto;
+  border-radius: 20px;
+}
+
+.container-interface .datapanel .onglet {
+  background-color: #030233;
+  color: #ffffff;
+  width: 100%;
+  position: relative;
+  height: 45px;
+  margin-bottom: 40px;
+  border-radius: 17px 17px 0 0;
+}
+
+.container-interface .datapanel .onglet span {
+  line-height: 45px;
+  text-align: center;
+}
+
+.container-interface .datapanel .onglet .btn-close {
+  line-height: inherit;
 }
 
 .container-interface .datapanel-content {
@@ -223,11 +244,35 @@
   margin-top: 10px;
 }
 
+.container-interface .datapanel-menu {
+  margin-top: 50px;
+}
+
 .container-interface .classification {
   height: 95%;
   width: 95%;
   border: 2px solid #030233;
   margin: auto;
+  border-radius: 20px;
+}
+
+.container-interface .classification .onglet {
+  background-color: #030233;
+  color: #ffffff;
+  width: 100%;
+  position: relative;
+  height: 45px;
+  margin-bottom: 40px;
+  border-radius: 17px 17px 0 0;
+}
+
+.container-interface .classification .onglet span {
+  line-height: 45px;
+  text-align: center;
+}
+
+.container-interface .classification .onglet .btn-close {
+  line-height: inherit;
 }
 
 .container-interface .classification-section {
@@ -289,6 +334,136 @@
   width: 50%;
   min-height: 400px;
   margin: 15px;
+}
+
+.container-interface .results {
+  height: 95%;
+  width: 95%;
+  border: 2px solid #030233;
+  margin: auto;
+  border-radius: 20px;
+  overflow-y: hidden;
+}
+
+.container-interface .results-content {
+  padding: 15px;
+}
+
+.container-interface .results .onglet {
+  background-color: #030233;
+  color: #ffffff;
+  width: 100%;
+  position: relative;
+  height: 45px;
+  margin-bottom: 40px;
+  border-radius: 17px 17px 0 0;
+}
+
+.container-interface .results .onglet span {
+  line-height: 45px;
+  text-align: center;
+}
+
+.container-interface .results .onglet i {
+  font-size: 1.35em;
+}
+
+.container-interface .results .onglet .btn-close {
+  line-height: inherit;
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+.container-interface .results-col {
+  width: 100%;
+  height: 100%;
+}
+
+.container-interface .results-col__left {
+  background-color: #2D75EE;
+  color: #ffffff;
+  width: 60%;
+  height: 80%;
+  padding: 10px 20px;
+  border-radius: 11px;
+}
+
+.container-interface .results-col__left .stats-results__section {
+  background-color: #ffffff;
+  color: #030233;
+  padding: 10px;
+}
+
+.container-interface .results-col__left .stats-results__section select {
+  border: 1px solid #030233;
+  border-radius: 20px;
+  background-color: #ffffff;
+  height: 1.5em;
+}
+
+.container-interface .results-col__left .view-mode h3 {
+  margin-top: 0;
+}
+
+.container-interface .results-col__left .button-menu {
+  width: 60%;
+  min-width: 150px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-height: 100px;
+}
+
+.container-interface .results-col__right {
+  margin-left: 25px;
+}
+
+.container-interface .results-col__right .right-side__clusters {
+  background-color: #2D75EE;
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 11px;
+}
+
+.container-interface .results-col__right .right-side__clusters h3 {
+  margin-top: 0;
+}
+
+.container-interface .results-col__right .right-side__clusters .layout {
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 11px;
+  margin-bottom: 10px;
+}
+
+.container-interface .results-col__right .right-side__operations {
+  background-color: #B3C7EF;
+  color: #030233;
+  padding: 15px;
+  border-radius: 11px;
+}
+
+.container-interface .results-col__right .right-side__infos {
+  border-radius: 11px;
+  background-color: #2D75EE;
+  padding: 15px;
+  border-radius: 11px;
+  margin-top: 15px;
+}
+
+.container-interface .results-col__right .right-side__infos div {
+  background-color: #ffffff;
+}
+
+.container-interface .results-col__right .right-side__infos div td, .container-interface .results-col__right .right-side__infos div th {
+  border: 1px solid #030233;
+  border-collapse: collapse;
+  padding: 2px;
+  text-align: center;
+}
+
+.container-interface .results-col__right .right-side__infos div table {
+  border-collapse: collapse;
 }
 
 body header nav {
@@ -413,7 +588,7 @@ a {
 }
 
 .container {
-  background-image: url("../images/iss065e385549.jpg");
+  background-image: url("../images/nasa.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -479,6 +654,12 @@ a {
 
 .display-block {
   display: block !important;
+}
+
+.align-end {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .container {

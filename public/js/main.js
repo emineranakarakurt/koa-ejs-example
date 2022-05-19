@@ -99,3 +99,16 @@ if(dataTable){
         }
     }
 }
+
+//page results
+const projectionPanel = document.querySelector('.projection-panel');
+const centroids = document.querySelector('.centroids');
+const statsResults = document.querySelector('.stats-results');
+if(statsResults){
+    projectionPanel.addEventListener('click', function() {
+        statsResults.innerHTML = "<%- include('./results/projectionpanel'); %>";
+    })
+    centroids.addEventListener('click', function () {
+        statsResults.innerHTML = "<%- include('./results/centroids'); %>";
+    })
+}

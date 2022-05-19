@@ -29,7 +29,7 @@ a{
     color: $blanc;
 }
 .container{
-    background-image: url('../images/iss065e385549.jpg');
+    background-image: url('../images/nasa.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -66,6 +66,9 @@ a{
 }
 .display-block{
     display: block !important;
+}
+.align-end{
+    align-items: flex-end;
 }
 ///////////////////////// 
 .container{
