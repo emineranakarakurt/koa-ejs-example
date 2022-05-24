@@ -2,14 +2,34 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
+const mount = require('koa-mount');
 const static = require('koa-static');
 const render = require("koa-ejs");
 const path = require("path");
+const url = require('url');
 
 const PORT = process.env.PORT || 8000;
 
 const app = new Koa();
 const router = new Router();
+
+app.use(async (ctx, next)=> {
+  const parsedUrl = url.parse(ctx.url);
+  if (
+      (parsedUrl.pathname === '/register') || 
+      (parsedUrl.pathname === '/login')
+  ) {
+      parsedUrl.pathname = parsedUrl.pathname + '/'
+      ctx.redirect(url.format(parsedUrl));
+      return
+  }
+
+  await next();
+});
+
+app.use(
+  mount('/', require('./src/app'))
+);
 
 app.use(
   static(__dirname + '/public/')
@@ -42,68 +62,27 @@ function renderTemplate(path, file){
   })
 }
 
-router.get("/", async (ctx) => {
-  await ctx.render("langue");
-  
-});
-router.get("/didactiel", async (ctx) => {
-  await ctx.render("didactiel");
-});
-router.get("/connexion", async (ctx) => {
-  await ctx.render("connexion");
-});
-router.get("/openorcreate", async (ctx) => {
-  await ctx.render("openorcreate");
-});
-router.get("/openproject", async (ctx) => {
-  await ctx.render("openproject");
-});
-router.get("/createproject", async (ctx) => {
-  await ctx.render("createproject");
-});
-router.get("/projectsolo", async (ctx) => {
-  await ctx.render("projectsolo");
-});
-router.get("/projectduo", async (ctx) => {
-  await ctx.render("projectduo");
-});
-router.get("/generatedata", async (ctx) => {
-  await ctx.render("generatedata");
-});
-router.get("/datapanel", async (ctx) => {
-  await ctx.render("datapanel");
-});
-router.get("/classification", async (ctx) => {
-  await ctx.render("classification");
-});
-router.get("/results-projection-panel", async (ctx) => {
-  await ctx.render("results-projection-panel");
-});
-router.get("/results-cardinality", async (ctx) => {
-  await ctx.render("results-cardinality");
-});
-router.get("/results-centroids", async (ctx) => {
-  await ctx.render("results-centroids");
-});
-router.get("/results-evaluation", async (ctx) => {
-  await ctx.render("results-evaluation");
-});
+renderTemplate("/", "langue");
+renderTemplate("/didactiel", "didactiel"); 
+renderTemplate("/connexion", "connexion"); 
+renderTemplate("/openorcreate", "openorcreate"); 
+renderTemplate("/openproject", "openproject"); 
+renderTemplate("/createproject", "createproject"); 
+renderTemplate("/projectsolo", "projectsolo"); 
+renderTemplate("/projectduo", "projectduo"); 
+renderTemplate("/generatedata", "generatedata"); 
+renderTemplate("/datapanel", "datapanel"); 
+renderTemplate("/classification", "classification"); 
+renderTemplate("/results-projection-panel", "results-projection-panel"); 
+renderTemplate("/results-cardinality", "results-cardinality"); 
+renderTemplate("/results-centroids", "results-centroids"); 
+renderTemplate("/results-evaluation", "results-evaluation"); 
+renderTemplate("/results-historique", "results-historique"); 
+renderTemplate("/results-image", "results-image"); 
+renderTemplate("/results-scatter-plot", "results-scatter-plot"); 
+renderTemplate("/results-similarity", "results-similarity"); 
+renderTemplate("/results-weights", "results-weights"); 
 
-router.get("/results-historique", async (ctx) => {
-  await ctx.render("results-historique");
-});
-router.get("/results-image", async (ctx) => {
-  await ctx.render("results-image");
-});
-router.get("/results-scatter-plot", async (ctx) => {
-  await ctx.render("results-scatter-plot");
-});
-router.get("/results-similarity", async (ctx) => {
-  await ctx.render("results-similarity");
-});
-router.get("/results-weights", async (ctx) => {
-  await ctx.render("results-weights");
-});
 app
   .use(logger())
   .use(bodyParser())

@@ -17,6 +17,7 @@ html, body{
     height: 100vh;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 1em;
+    overflow: hidden;
 }
 ul{
     padding: 0;
@@ -321,3 +322,12 @@ input[type=text], input[type=number]{
         }
     }
 }
+
+#birdView{
+    img{
+        width: 50%;
+    }
+}
+// #upload{
+//     display:none
+// }

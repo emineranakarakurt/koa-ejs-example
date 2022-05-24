@@ -112,17 +112,37 @@
   width: 100%;
 }
 
-.container-interface .image-import__view .image {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border: 15px solid #0046ca4d;
-  border-bottom: none;
-  border-radius: 11px 11px 0 0;
+.container-interface .image-import__view #carte {
+  background-color: #0046ca4d;
 }
 
-.container-interface .image-import__view .image img {
-  width: 580px;
-  height: auto;
+.container-interface .image-import__view #carte .divImage {
+  overflow: auto;
+  width: 500px;
+  height: 500px;
+  cursor: -webkit-grab;
+  cursor: grab;
+  -webkit-user-select: all;
+     -moz-user-select: all;
+      -ms-user-select: all;
+          user-select: all;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container-interface .image-import__view #carte .divImage img {
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .container-interface .image-import__view .toolbar {
@@ -572,6 +592,7 @@ html, body {
   height: 100vh;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 1em;
+  overflow: hidden;
 }
 
 ul {
@@ -953,5 +974,9 @@ input[type=text], input[type=number] {
 
 .modal-window div .data-table td {
   border: 1px solid #030233;
+}
+
+#birdView img {
+  width: 50%;
 }
 /*# sourceMappingURL=style.css.map */

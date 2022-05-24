@@ -19,16 +19,24 @@
             width: 100%;
         }
         &__view{
-            .image{
-                box-sizing: border-box;
-                border: 15px solid $bleu-30;
-                border-bottom: none;
-                border-radius: 11px 11px 0 0;
-                img{
-                    width: 580px;
-                    height: auto;
-                }
+            #carte{
+                background-color: $bleu-30;
+                .divImage{
+                    overflow: auto;
+                    width: 500px;
+                    height: 500px;
+                    cursor: grab;
+                    user-select: all;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                      pointer-events: none;
+                      user-select: none;
+                    }
+                  }
             }
+           
             .toolbar{
                 background-color: $bleu-saphir;
                 border-radius: 0 0 11px 11px;
