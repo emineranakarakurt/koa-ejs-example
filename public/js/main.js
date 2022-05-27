@@ -1,6 +1,13 @@
-import {tab} from './matrice.js';
+//import {tab} from './matrice.js';
 import {base64String} from './base64.js';
-
+import {result} from './result.js';
+////////////////////////////////////////////////////////////////
+if(document.querySelector('.accueil')){
+    document.querySelector('aside').style.display = "none";
+    document.querySelector('nav').style.display = "none";
+    document.querySelector('.container').style.minHeight = "100vh"
+}
+///////////////////////////////////////////////////////////////
 //Lancement du serveur Websocket
 // const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
 const ws = new WebSocket("ws://127.0.0.1:8081");
@@ -609,37 +616,6 @@ if(statsResults){
 var newTab = [];
 var height = 218;
 var width = 255;
-var clusterColor = [{
-    'value': -8191745,
-    'falpha': 0.0
-}, {
-    'value': -65463,
-    'falpha': 0.0
-}, {
-    'value': -5888,
-    'falpha': 0.0
-}, {
-    'value': -16711907,
-    'falpha': 0.0
-}, {
-    'value': -16732161,
-    'falpha': 0.0
-}, {
-    'value': -4802890,
-    'falpha': 0.0
-}, {
-    'value': -10616650,
-    'falpha': 0.0
-}, {
-    'value': -4848896,
-    'falpha': 0.0
-}, {
-    'value': -10963456,
-    'falpha': 0.0
-}, {
-    'value': -16730954,
-    'falpha': 0.0
-}];
 
 function toColor(num) {
     num >>>= 0;
@@ -649,22 +625,42 @@ function toColor(num) {
         a = ((num & 0xFF000000) >>> 24) / 255;
     return "rgba(" + [r, g, b, a].join(",") + ")";
 }
+function hexify(color) {
+    var values = color
+      .replace(/rgba?\(/, '')
+      .replace(/\)/, '')
+      .replace(/[\s+]/g, '')
+      .split(',');
+    var a = parseFloat(values[3] || 1),
+        r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
+        g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
+        b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
+    return "#" +
+      ("0" + r.toString(16)).slice(-2) +
+      ("0" + g.toString(16)).slice(-2) +
+      ("0" + b.toString(16)).slice(-2);
+  }
 var colorscaleValue = [];
 for (let i = 0; i < 10; i++) {
     let tab = [];
     let number = '0.' + i;
     tab.push(parseFloat(number));
-    tab.push(toColor(clusterColor[i].value));
+    console.log(result._clusterColor);
+    tab.push(toColor(result._clusterColor[i].value));
     colorscaleValue.push(tab);
 }
 colorscaleValue.push([1,
-    toColor(clusterColor[9].value)
+    toColor(result._clusterColor[9].value)
 ]);
+var colorTabInput = [];
+for(let i = 0; i < colorscaleValue.length; i++){
+    colorTabInput.push(hexify(colorscaleValue[i][1]));
+}
 console.log(colorscaleValue);
 for (let i = height; i > 0; i--) {
     let tabTab = [];
     for (let j = width; j > 0; j--) {
-        tabTab.push(tab[i * height + j]);
+        tabTab.push(result.clusterMap[i * height + j]);
     }
     newTab.push(tabTab);
 }
@@ -678,3 +674,45 @@ if(document.querySelector('#myDiv')){
     Plotly.newPlot('myDiv', data);
 }
 
+const tableCluster = document.querySelector('.right-side__infos div');
+if(tableCluster){
+    let table = document.createElement('table');
+    tableCluster.appendChild(table);
+    for(let i = 0; i < 3; i++){
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
+        let th = document.createElement('th');
+        
+        switch(i){
+            case 0:
+                th.textContent = "Name";
+                break;
+            case 1:
+                th.textContent = "Color";
+                break;
+            case 2: 
+                th.textContent = "Cardinality";
+                break;
+        }
+        tr.appendChild(th);
+        for(let j = 0; j < colorscaleValue.length - 1; j++){
+            let td = document.createElement('td');
+            switch(i){
+                case 0:
+                    td.textContent = "Cluster " + (j + 1); 
+                    break;
+                case 1:
+                    let inputColor = document.createElement('input');
+                    inputColor.type = "color";
+                    inputColor.value = colorTabInput[j];
+                    console.log(colorTabInput);
+                    td.appendChild(inputColor);
+                    break;
+                case 2: 
+                    td.textContent = result._cardinalityCluster[j];
+                    break;
+            }
+            tr.appendChild(td);
+        }
+    }
+}

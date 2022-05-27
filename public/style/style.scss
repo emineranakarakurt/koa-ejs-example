@@ -11,8 +11,8 @@
 }
 @font-face {
     font-family: Futura;
-    src: url('../font/Futura\ Book\ font.ttf');
-} 
+    src: url('../font/Futura_Book_font.ttf');
+}   
 html, body{
     margin: 0;
     padding: 0;
@@ -20,7 +20,7 @@ html, body{
     height: 100vh;
     font-family: 'Futura', 'Nunito Sans', sans-serif;
     font-size: 1em;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 ul{
     padding: 0;
@@ -33,7 +33,7 @@ a{
     color: $blanc;
 }
 .container{
-    background-image: url('../images/nasa2.jpg');
+    background-image: url('../images/nasa.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -92,15 +92,6 @@ a{
     width: 60vw;
     min-height: 350px;
     padding: 15px;
-    // .logo
-    // {
-    //     width: 110px;
-    //     height: 110px;
-    //     display: block;
-    //     position: absolute;
-    //     top: 15px;
-    //     left: 15px;
-    // }
 }
 .btn{
     text-align: center;
@@ -117,6 +108,9 @@ a{
         color: $bleu-nuit;
         border: 3px solid $bleu-nuit;
         box-sizing: border-box;
+        a{
+            color: $bleu-nuit;
+        }
     }
     &-sm{
         padding: 5px;
@@ -170,11 +164,7 @@ input[type=text], input[type=number]{
             background: radial-gradient(circle, #39c4068a 0%, #38811b 100%);
             transform: translate(-50%, -50%);
             transition: width 0.2s ease, height 0.2s ease;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-}
+        }
         &:hover:before {
             --size: 200px;
         }
@@ -236,9 +226,8 @@ input[type=text], input[type=number]{
         padding: 10px;
         p{
             margin: 0;
-        } 
+        }
     }
- 
 }
 .modal-window{
     display: none;
@@ -278,8 +267,6 @@ input[type=text], input[type=number]{
         }
     }
     div{
-       
-        
         .data-table{
             max-height: 300px;
             overflow-y: scroll;
@@ -304,7 +291,7 @@ input[type=text], input[type=number]{
     }
 }
 
-#birdView{
+.birdView{
     img{
         width: 50%;
     }
@@ -312,3 +299,7 @@ input[type=text], input[type=number]{
 // #upload{
 //     display:none
 // }
+
+g.infolayer{
+    display: none;
+}

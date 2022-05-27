@@ -94,40 +94,41 @@
 }
 
 .container {
-  background-image: url("../images/iss065e385549.jpg");
-  min-height: calc(100vh - 80px);
+  background-image: url("../images/nasa2.jpg");
+  min-height: calc(100vh - 60px);
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 10;
 }
 
 .container-interface {
   width: 100%;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 60px);
   background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
-  padding: 50px 0;
+  padding: 10px 0;
+  z-index: 10;
 }
 
 .container-interface .image-import-duo {
   width: 100%;
+  overflow-y: scroll;
 }
 
-.container-interface .image-import__view #carte {
+.container-interface .image-import__view .carte {
   background-color: #0046ca4d;
 }
 
-.container-interface .image-import__view #carte .divImage {
+.container-interface .image-import__view .carte .divImage {
   overflow: auto;
-  max-width: 500px;
-  max-height: 500px;
-  height: 50vh;
-  width: 30vw;
+  width: 500px;
+  height: 500px;
   cursor: -webkit-grab;
   cursor: grab;
-  -webkit-user-select: all;
-     -moz-user-select: all;
-      -ms-user-select: all;
-          user-select: all;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,7 +140,7 @@
           align-items: center;
 }
 
-.container-interface .image-import__view #carte .divImage img {
+.container-interface .image-import__view .carte .divImage img {
   pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -157,14 +158,36 @@
   margin-top: 50px;
 }
 
+.container-interface .comparaison .col {
+  width: 95%;
+}
+
+.container-interface .comparaison .col .juxtapose {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  border: 15px solid #B3C7EF;
+  border-radius: 20px;
+  height: 500px !important;
+  width: 400px !important;
+}
+
+.container-interface .comparaison .col .difference {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.container-interface .comparaison .col .difference img {
+  border: 15px solid #B3C7EF;
+  border-radius: 20px;
+}
+
 .container-interface .infobar {
   background-color: #ffffff;
   border-top: 1px solid #030233;
-  position: fixed;
+  position: absolute;
   top: calc(100% - 5vh);
   bottom: 0;
   height: 5vh;
-  min-height: 44px;
   width: calc(100% - 235px);
   color: #030233;
 }
@@ -360,25 +383,22 @@
 }
 
 .container-interface .results {
-  height: 95%;
-  width: 95%;
   border: 2px solid #030233;
-  margin: auto;
+  margin: 0 10px;
   border-radius: 20px;
-  overflow-y: hidden;
+  height: calc(100vh - 80px - 5vh - 10px);
 }
 
 .container-interface .results-content {
-  padding: 15px;
+  padding: 5px;
 }
 
 .container-interface .results .onglet {
   background-color: #030233;
   color: #ffffff;
-  width: 100%;
   position: relative;
   height: 45px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   border-radius: 17px 17px 0 0;
 }
 
@@ -399,17 +419,20 @@
 }
 
 .container-interface .results-col {
-  width: 100%;
-  height: 100%;
+  height: calc(80vh - 20px);
+  overflow-y: auto;
 }
 
 .container-interface .results-col__left {
   background-color: #2D75EE;
   color: #ffffff;
-  width: 60%;
-  height: 80%;
+  width: 70%;
   padding: 10px 20px;
   border-radius: 11px;
+}
+
+.container-interface .results-col__left .stats-results {
+  width: 100%;
 }
 
 .container-interface .results-col__left .stats-results__section {
@@ -423,6 +446,17 @@
   border-radius: 20px;
   background-color: #ffffff;
   height: 1.5em;
+}
+
+.container-interface .results-col__left .stats-results__image {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.container-interface .results-col__left .stats-results__image #myDiv {
+  margin: 0 auto;
+  height: calc(256px * 2.3);
+  width: calc(219px * 2.3);
 }
 
 .container-interface .results-col__left .view-mode h3 {
@@ -439,6 +473,7 @@
 
 .container-interface .results-col__right {
   margin-left: 25px;
+  width: 30%;
 }
 
 .container-interface .results-col__right .right-side__clusters {
@@ -476,6 +511,7 @@
 
 .container-interface .results-col__right .right-side__infos div {
   background-color: #ffffff;
+  overflow-x: scroll;
 }
 
 .container-interface .results-col__right .right-side__infos div td, .container-interface .results-col__right .right-side__infos div th {
@@ -495,8 +531,6 @@ body header nav {
   min-height: 60px;
   height: 5vh;
   color: #ffffff;
-  -webkit-box-shadow: 0px 20px 50px 3px rgba(0, 0, 0, 0.5);
-          box-shadow: 0px 20px 50px 3px rgba(0, 0, 0, 0.5);
 }
 
 body header nav .nav-links ul {
@@ -531,9 +565,9 @@ body main {
 
 body main aside {
   background-color: #ffffff;
+  -webkit-box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
+          box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
   padding: 10px;
-  -webkit-box-shadow: 11px 2px 15px -3px rgba(174, 174, 174, 0.52);
-          box-shadow: 11px 2px 15px -3px rgba(174, 174, 174, 0.52);
   min-width: 235px;
   padding-top: 30px;
 }
@@ -541,7 +575,7 @@ body main aside {
 body main aside .aside-logo {
   -ms-flex-item-align: start;
       align-self: flex-start;
-  z-index: 5;
+  z-index: 6;
   position: absolute;
   top: 0;
   left: 50px;
@@ -614,7 +648,7 @@ body main .preproject-row.openproject {
 
 @font-face {
   font-family: Futura;
-  src: url("../font/Futura Book font.ttf");
+  src: url("../font/Futura_Book_font.ttf");
 }
 
 html, body {
@@ -624,7 +658,7 @@ html, body {
   height: 100vh;
   font-family: 'Futura', 'Nunito Sans', sans-serif;
   font-size: 1em;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 ul {
@@ -641,7 +675,7 @@ a {
 }
 
 .container {
-  background-image: url("../images/nasa2.jpg");
+  background-image: url("../images/nasa.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -763,6 +797,10 @@ a {
           box-sizing: border-box;
 }
 
+.btn-second a {
+  color: #030233;
+}
+
 .btn-sm {
   padding: 5px;
   border-radius: 20px;
@@ -817,13 +855,10 @@ input[type=text], input[type=number] {
   width: var(--size);
   height: var(--size);
   background: radial-gradient(circle, #39c4068a 0%, #38811b 100%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   -webkit-transition: width 0.2s ease, height 0.2s ease;
   transition: width 0.2s ease, height 0.2s ease;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
 }
 
 .btn-anim-green:hover:before {
@@ -976,7 +1011,11 @@ input[type=text], input[type=number] {
   border: 1px solid #030233;
 }
 
-#birdView img {
+.birdView img {
   width: 50%;
+}
+
+g.infolayer {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
