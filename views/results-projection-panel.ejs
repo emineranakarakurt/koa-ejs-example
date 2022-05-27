@@ -2,40 +2,44 @@
     <div class="results">
         <div class="onglet d-flex space-around align-center"><a href="/classification"><i class="fa-solid fa-circle-arrow-left"></i></a><span>Data panel</span><span class="btn-close">X</span></div>
         <div class="results-content">
-            <div class="results-col d-flex">
-                <div class="results-col__left d-flex column">
+            <div class="results-col d-flex space-around">
+                <div class="results-col__left d-flex column space-between">
                     <div class="d-flex align-end">
                         <div class="toolbar d-flex column">
                             <i class="fa-solid fa-magnifying-glass-plus"></i>
                             <i class="fa-solid fa-magnifying-glass-minus"></i>
                         </div>
                         <div class="stats-results">
+                            
                             <h2>Projection panel</h2>
-                            <div class="stats-results__section">
-                                <div>
-                                    <label for="method">Méthode de visualisation</label>
-                                    <select name="method" id="method">
-                                        <option value="isoMDS">isoMDS</option>
-                                    </select>
+                            <div class="d-flex ">
+                                <div class="stats-results__section">
+                                    <div>
+                                        <label for="method">Méthode de visualisation</label>
+                                        <select name="method" id="method">
+                                            <option value="isoMDS">isoMDS</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="dimension">Dimension</label>
+                                        <select name="dimension" id="dimension">
+                                            <option value="2d">2D</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="visualiser">Visualiser</label>
+                                        <select name="visualiser" id="visualiser">
+                                            <option value="visualiser">Random</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="points-similaires">Plus de points similaires au cluster</label>
+                                        <input type="range" name="points-similaires" id="points-similaires" value="10">
+                                        <output name="points-similaires-output" id="points-similaires-output">10</output>
+                                        <button class="btn-sm btn-primary">Refresh</button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label for="dimension">Dimension</label>
-                                    <select name="dimension" id="dimension">
-                                        <option value="2d">2D</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="visualiser">Visualiser</label>
-                                    <select name="visualiser" id="visualiser">
-                                        <option value="visualiser">Random</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="points-similaires">Plus de points similaires au cluster</label>
-                                    <input type="range" name="points-similaires" id="points-similaires" value="10">
-                                    <output name="points-similaires-output" id="points-similaires-output">10</output>
-                                    <button class="btn-sm btn-primary">Refresh</button>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

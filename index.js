@@ -82,7 +82,7 @@ renderTemplate("/results-image", "results-image");
 renderTemplate("/results-scatter-plot", "results-scatter-plot"); 
 renderTemplate("/results-similarity", "results-similarity"); 
 renderTemplate("/results-weights", "results-weights"); 
-
+renderTemplate("/compare", "compare"); 
 app
   .use(logger())
   .use(bodyParser())

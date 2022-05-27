@@ -118,8 +118,10 @@
 
 .container-interface .image-import__view #carte .divImage {
   overflow: auto;
-  width: 500px;
-  height: 500px;
+  max-width: 500px;
+  max-height: 500px;
+  height: 50vh;
+  width: 30vw;
   cursor: -webkit-grab;
   cursor: grab;
   -webkit-user-select: all;
@@ -158,10 +160,11 @@
 .container-interface .infobar {
   background-color: #ffffff;
   border-top: 1px solid #030233;
-  position: absolute;
+  position: fixed;
   top: calc(100% - 5vh);
   bottom: 0;
   height: 5vh;
+  min-height: 44px;
   width: calc(100% - 235px);
   color: #030233;
 }
@@ -487,21 +490,13 @@
 }
 
 body header nav {
-  background-color: #030233;
-  min-height: 80px;
+  background: -webkit-gradient(linear, left bottom, left top, from(#030233), to(#06045c));
+  background: linear-gradient(to top, #030233, #06045c);
+  min-height: 60px;
   height: 5vh;
   color: #ffffff;
-}
-
-body header nav .nav-logo {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  z-index: 5;
-}
-
-body header nav .nav-logo img {
-  width: 110px;
-  height: 110px;
+  -webkit-box-shadow: 0px 20px 50px 3px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 20px 50px 3px rgba(0, 0, 0, 0.5);
 }
 
 body header nav .nav-links ul {
@@ -514,22 +509,47 @@ body header nav .nav-links ul li {
   margin: 0 15px;
 }
 
+body header nav .nav-support {
+  position: relative;
+  left: 150px;
+}
+
 body header nav .nav-support img {
+  height: 23px;
+  width: 23px;
   margin: 0 10px;
 }
 
+body header nav .nav-support img:nth-child(0n + 3) {
+  height: 15px;
+  width: 15px;
+}
+
 body main {
-  min-height: calc(100% - 80px);
+  min-height: calc(100% - 60px);
 }
 
 body main aside {
   background-color: #ffffff;
-  -webkit-box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
-          box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
   padding: 10px;
+  -webkit-box-shadow: 11px 2px 15px -3px rgba(174, 174, 174, 0.52);
+          box-shadow: 11px 2px 15px -3px rgba(174, 174, 174, 0.52);
   min-width: 235px;
-  z-index: -1;
-  padding-top: 40px;
+  padding-top: 30px;
+}
+
+body main aside .aside-logo {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 50px;
+}
+
+body main aside .aside-logo img {
+  width: 80px;
+  height: 80px;
 }
 
 body main aside .aside-data {
@@ -543,20 +563,27 @@ body main aside .aside-image, body main aside .aside-image, body main aside .asi
 body main aside div {
   width: 100%;
   color: #ffffff;
-  min-height: 180px;
   border-radius: 4px;
+  min-height: 150px;
   padding: 0 15px;
+  margin-bottom: 20px;
+  height: 100%;
 }
 
 body main .preproject {
-  background: rgba(255, 255, 255, 0.37);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
-  border-radius: 21px;
+  color: #030233;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  border-radius: 15px;
   color: #030233;
   margin: auto;
   width: 30vw;
-  min-height: 350px;
+  height: 30vh;
   padding: 15px;
 }
 
@@ -585,14 +612,19 @@ body main .preproject-row.openproject {
           box-sizing: border-box;
 }
 
+@font-face {
+  font-family: Futura;
+  src: url("../font/Futura Book font.ttf");
+}
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100vh;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Futura', 'Nunito Sans', sans-serif;
   font-size: 1em;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 ul {
@@ -609,7 +641,7 @@ a {
 }
 
 .container {
-  background-image: url("../images/nasa.jpg");
+  background-image: url("../images/nasa2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -696,23 +728,18 @@ a {
 }
 
 .accueil {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.37);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
-  border-radius: 21px;
+  color: #030233;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  border-radius: 15px;
   width: 60vw;
   min-height: 350px;
   padding: 15px;
-}
-
-.accueil .logo {
-  width: 110px;
-  height: 110px;
-  display: block;
-  position: absolute;
-  top: 15px;
-  left: 15px;
 }
 
 .btn {
@@ -790,10 +817,13 @@ input[type=text], input[type=number] {
   width: var(--size);
   height: var(--size);
   background: radial-gradient(circle, #39c4068a 0%, #38811b 100%);
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   -webkit-transition: width 0.2s ease, height 0.2s ease;
   transition: width 0.2s ease, height 0.2s ease;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 
 .btn-anim-green:hover:before {
@@ -868,40 +898,10 @@ input[type=text], input[type=number] {
       -ms-user-select: none;
           user-select: none;
   padding: 10px;
-  -webkit-animation-duration: 0.6s;
-  animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: bounceInDown;
-  animation-name: bounceInDown;
 }
 
 .accordeon-content p {
   margin: 0;
-}
-
-@-webkit-keyframes bounceInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(-35px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-  }
-}
-
-@keyframes bounceInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(-35px);
-            transform: translateY(-35px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
 }
 
 .modal-window {

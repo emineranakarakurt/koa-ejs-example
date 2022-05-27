@@ -1,0 +1,178 @@
+client.on('connect', function(connection) {
+        console.log('WebSocket Client Connected');
+        console.log(__dirname);
+        
+        function snd(msg){
+            connection.sendBytes(Req.encode(Req.create(msg)).finish());
+        }
+	
+        const start = Date.now();
+        snd({header:14});
+
+        connection.on('error', function(error) {
+            console.log("Connection Error: " + error.toString());
+        });
+
+        connection.on('close', function() {
+            console.log('echo-protocol Connection Closed');
+        });
+
+        var currentClassifID = 0;
+
+        connection.on('message', function(message) {
+            message = Resp.decode(message.binaryData);
+            //console.log(message);
+            //"Chargement d'image" -> "Génération de donnée" -> "Lancer une classification simple utilisant KMeans"
+            switch (message.header){
+                case 42: //RESPONSE_CLIENT_ID
+                    uid = message.responseClientBody.clientID;
+                    snd({
+                        imageOpenRequest:{
+                            base64File: file,
+                            checksum: "0333ff8c224366dac05ba154f2c6e4d9",
+                            isLaunchOrthoRect: false,
+                            fileName: "070992.tif",
+                            overWrite: true
+                        },
+                        clientId: uid,
+                        header: 20 //OPEN_IMAGE
+                    }); break;
+                case 16: //OPEN_IMAGE_RESPONSE
+                    result = message.imageOpenResp.idData;
+                    snd({
+                        imageInterfaceRequest:{
+                            idMessage: result
+                        },
+                        clientId: uid,
+                        header: 21 //GET_IMAGE_INTERFACE
+                    }); break;
+                case 17: //IMAGE_INTERFACE
+                    result2.push(message.imageInterfaceResp.imageInterf);
+                    snd({
+                        bufferedImageRequest:{
+                            idMessage: result,
+                            doRescale: false
+                        },
+                        clientId: uid,
+                        header: 22 //GET_BUFFER_IMAGE
+                    }); break;
+                // create data image
+                case 18: //BUFFERED_IMAGE
+                    getImg.base64File = message.bufferedImageResp.base64File;
+                    fs.writeFileSync(__dirname+"/demo.tif", getImg.base64File);
+                    //afficheZoomImg();
+                    if (!second)
+                        snd({
+                            dataImageRequest:{
+                                images: result2,
+                                mask: [
+                                    {path:"."}
+                                ],
+                                samplingMethod: 1,
+                                paramSamplingMethode: 4.0,
+                                idPercentage: 5,
+                                nameData: ""
+                            },
+                            clientId: uid,
+                            header: 23 //CREATE_DATA_IMAGE
+                        });
+                    else
+                        /*MONO_STRATEGY_APPROACH 			= 1;
+                        MULTI_STRATEGY_APPROACH 		= 2;
+                        MULTI_STRATEGY_ETC_APPROACH 	= 3;
+                        MACLAW_APPROACH 				= 4;
+                        VOTING_APPROACH 				= 5;
+                        MULTIRESOLUTION_APPROACH 		= 6;
+                        IMPORT_APPROACH 				= 7; */
+                        snd({
+                            rootClassificationRequest:{
+                                idClassif: 1
+                            },
+                            clientId: uid,
+                            header: 18 //GET_ROOT_CLASSIFICATION
+                        });
+                    break;
+                case 19: //DATA_IMAGE
+                    snd({
+                        dataInterfaceRequest:{
+                            id: message.dataImageResp.dataImageId
+                        },
+                        clientId: uid,
+                        header: 1 //GET_DATA_INTERFACE_BY_ID
+                    });break;
+                // create classification
+                case 3: //DATA_INTERFACE
+                    //mcb.IDData;
+                    //mcb.b64DataInterface;
+                    //mcb.dataInterface;
+                    snd({
+                        classificationRequest:{
+                            idData: message.dataInterfaceResp.IDData,
+                            classification: {
+                                isHybrid: false,
+                                isMaclaw: false,
+                                idData: message.dataInterfaceResp.IDData,
+                                choiceApproch: 1,
+                                distanceUse: 1,
+                                type: "utils.ParamClassifSimple",
+                                selectedMethod: "0",
+                                paramClustering: [
+                                    10.0,
+                                    10.0
+                                ],
+                                weightsParam: [
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ],
+                                hClustering: false
+                            }
+                        },
+                        clientId: uid,
+                        header: 2 //CREATE_CLASSIFICATION
+                    });break;
+                case 6: //CLASSIFICATION_RESPONSE_CODE
+                    //mcb.code;
+                    currentClassifID = message.classificationResp.code;
+                    snd({
+                        finishRequest:{
+                            idClassif: String(message.classificationResp.code)
+                        },
+                        clientId: uid,
+                        header: 15 //GET_FINISH
+                    });break;
+                case 12: //FINISH_RESULT
+                    //mcb.finish
+                    if (message.finishResp.finish!='100') {
+                        snd({
+                            finishRequest:{
+                                idClassif: String(currentClassifID)
+                            },
+                            clientId: uid,
+                            header: 15 //GET_FINISH
+                        });break;
+                    }
+                    snd({
+                        resultClassificationRequest:{
+                            idClassif: String(currentClassifID)
+                        },
+                        clientId: uid,
+                        header: 9 //GET_RESULT_CLASSIFICATION
+                    });break;
+                case 7: //RESULT_CLASSIFICATION
+                    //mcb.resultClassification
+                    second = true;
+                    result2.push(message.resultClassificationResp.imageInterf);
+                    snd({
+                        bufferedImageRequest:{
+                            idMessage: result,
+                            doRescale: false
+                        },
+                        clientId: uid,
+                        header: 22 //GET_BUFFER_IMAGE
+                    });
+                    break;
+                case 15:console.log( Date.now() - start);break; //ROOT_CLASSIFICATION
+                default: break;
+            }
+        });

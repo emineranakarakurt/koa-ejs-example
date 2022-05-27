@@ -2,8 +2,21 @@ const koa = require('koa');
 const fs = require('fs');
 const mount = require('koa-mount');
 const static = require('koa-static');
-const path = require('path')
+const PNG = require('pngjs').PNG;
+const path = require('path');
+const pixelmatch = require('pixelmatch');
 
+const img1 = PNG.sync.read(fs.readFileSync('./public/images/070992.png'));
+const img2 = PNG.sync.read(fs.readFileSync('./public/images/19960722.png'));
+
+
+const {width, height} = img1;
+const diff = new PNG({width, height});
+
+
+pixelmatch(img1.data, img2.data, diff.data, width, height, {threshold: 0.3});
+
+fs.writeFileSync('./public/images/diff.png', PNG.sync.write(diff));
 //var file = fs.readFile('./public/images/070992.tif', {encoding: 'base64'});
 const app = new koa();
 var WebSocketClient = require('websocket').client;
