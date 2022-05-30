@@ -34,12 +34,7 @@ main{
     overflow-y: auto;
     overflow-x: hidden;
 }
-.container{
-    background-image: url('../images/nasa.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-}
+
 .d-flex{
     display: flex;
 }
@@ -299,7 +294,7 @@ input[type=text], input[type=number]{
 
 .birdView{
     img{
-        width: 50%;
+        height: 50%;
     }
 }
 // #upload{

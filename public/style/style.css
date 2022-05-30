@@ -100,7 +100,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 10;
-  overflow-y: auto;
+  overflow-y: hidden;
+  height: calc(100vh - 60px);
 }
 
 .container-interface {
@@ -568,7 +569,7 @@ body main aside {
   padding: 10px;
   min-width: 235px;
   padding-top: 30px;
-  height: 100%;
+  height: calc(100vh - 60px);
 }
 
 body main aside .aside-data {
@@ -666,13 +667,6 @@ main {
   overflow-x: hidden;
 }
 
-.container {
-  background-image: url("../images/nasa.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-}
-
 .d-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -766,6 +760,10 @@ main {
   width: 60vw;
   min-height: 350px;
   padding: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 .btn {
@@ -1004,7 +1002,7 @@ input[type=text], input[type=number] {
 }
 
 .birdView img {
-  width: 50%;
+  height: 50%;
 }
 
 g.infolayer {

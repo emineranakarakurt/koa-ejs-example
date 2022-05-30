@@ -7,7 +7,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 10;
-    overflow-y: auto;
+    overflow-y: hidden;
+    height: calc(100vh - 60px);
 }
 .container-interface{
     width: 100%;
@@ -421,7 +422,7 @@ body{
             padding: 10px;
             min-width: 235px;
             padding-top: 30px;
-            height: 100%;
+            height: calc(100vh - 60px);
             .aside{
                
                 &-data{
