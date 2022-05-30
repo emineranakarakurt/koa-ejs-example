@@ -14,6 +14,7 @@
     background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
     padding: 10px 0;
     z-index: 10;
+    overflow-y: auto;
     .image-import
     {
         &-duo{

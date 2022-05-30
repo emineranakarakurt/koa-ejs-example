@@ -20,7 +20,6 @@ html, body{
     height: 100vh;
     font-family: 'Futura', 'Nunito Sans', sans-serif;
     font-size: 1em;
-    overflow: hidden;
 }
 ul{
     padding: 0;
@@ -92,6 +91,10 @@ a{
     width: 60vw;
     min-height: 350px;
     padding: 15px;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+    -ms-border-radius:15px;
+    -o-border-radius:15px;
 }
 .btn{
     text-align: center;
