@@ -31,6 +31,9 @@ a{
     text-decoration: none;
     color: $blanc;
 }
+main{
+    overflow-y: auto;
+}
 .container{
     background-image: url('../images/nasa.jpg');
     background-repeat: no-repeat;

@@ -2,15 +2,16 @@
 
 .container{
     background-image: url('../images/nasa2.jpg');
-    min-height: calc(100vh - 60px);
+    height: 100vh;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 10;
+    overflow: auto;
 }
 .container-interface{
     width: 100%;
-    min-height: calc(100vh - 60px);
+    height: 100vh;
     background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
     padding: 10px 0;
     z-index: 10;
@@ -19,15 +20,17 @@
     {
         &-duo{
             width: 100%;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
         &__view{
             .carte{
                 background-color: $bleu-30;
                 .divImage{
                     overflow: auto;
-                    width: 500px;
-                    height: 500px;
+                    width: 50vw;
+                    height: 50vh;
+                    max-width: 500px;
+                    max-height: 500px;
                     cursor: grab;
                     user-select: none;
                     display: flex;
@@ -74,11 +77,9 @@
     .infobar{
         background-color: $blanc;
         border-top: 1px solid $bleu-nuit;
-        position: absolute;
-        top: calc(100% - 5vh);
-        bottom: 0;
         height: 5vh;
-        width: calc(100% - 235px);
+        min-height: 40px;
+        width: 100%;
         color: $bleu-nuit;
         .projet-name{
             font-weight: bolder;

@@ -9,8 +9,8 @@ if(document.querySelector('.accueil')){
 }
 ///////////////////////////////////////////////////////////////
 //Lancement du serveur Websocket
-// const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
-const ws = new WebSocket("ws://127.0.0.1:8081");
+const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
+// const ws = new WebSocket("ws://127.0.0.1:8081");
 
 const userId = JSON.stringify({
     header:"REQUEST_CLIENT_ID"
