@@ -8,7 +8,7 @@ const render = require("koa-ejs");
 const path = require("path");
 const url = require('url');
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 80;
 
 const app = new Koa();
 const router = new Router();

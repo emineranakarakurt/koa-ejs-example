@@ -15,9 +15,10 @@
     width: 85vw;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: 10;
     overflow-y: auto;
     height: calc(100vh - 60px);
+    position: absolute;
+right: 0;
     .image-import
     {
         &-duo{
@@ -92,8 +93,6 @@
         border-top: 1px solid $bleu-nuit;
         height: 5vh;
         min-height: 40px;
-        position: absolute;
-        bottom: 0;
         width: 85vw;
         color: $bleu-nuit;
         .projet-name{
@@ -136,13 +135,15 @@
             }
            
         }
-        
+       
     }
+     .button-group{
+            margin-bottom: 5vh;
+        }
     .datapanel{
-        height: 95%;
         width: 95%;
         border: 2px solid $bleu-nuit;
-        margin: auto;
+        margin: 10px auto;
         border-radius: 20px;
         .onglet{
             background-color: $bleu-nuit;
@@ -187,15 +188,14 @@
             }
         }
         &-menu{
-            margin-top: 50px;
+            margin: 50px 0;
         }
         
     }
     .classification{
-        height: 95%;
         width: 95%;
         border: 2px solid $bleu-nuit;
-        margin: auto;
+        margin: 10px auto;
         border-radius: 20px;
         .onglet{
             background-color: $bleu-nuit;
@@ -248,12 +248,18 @@
                 margin-left: 15px;
             }
         }
+        a{
+            button{
+                margin: 3vh 0;
+            }
+        }
     }
     .modal-window{
-        
+        z-index: 20;
         .accordeon{
             margin-top: 50px;
             max-height: 400px;
+            width: 50vw;
             overflow-y: scroll;
             overflow-x: hidden;
         }
@@ -269,10 +275,10 @@
         }
     }
     .results{
+        width: 95%;
         border: 2px solid $bleu-nuit;
-        margin: 0 10px;
+        margin: 10px auto;
         border-radius: 20px;
-        height: calc(100vh - 80px - 5vh - 10px);
         &-content{
             padding: 5px;
         }
@@ -298,12 +304,10 @@
             }
         }
         &-col{
-            height: calc(80vh - 20px);
             overflow-y: auto;
             &__left{
                 background-color: $bleu-saphir;
                 color: $blanc;
-                width: 70%;
                 padding: 10px 20px;
                 border-radius: 11px;
                 .stats-results{
@@ -323,6 +327,7 @@
                     &__image{
                         width: 100%;
                         background-color: $blanc;
+                        margin-bottom: 3vh;
                         #myDiv{
                             margin: 0 auto;
                             height: calc(256px * 2.3);
@@ -359,6 +364,9 @@
                             padding: 5px;
                             border-radius: 11px;
                             margin-bottom: 10px;
+                            img{
+                                width: 100%;
+                            }
                         }
                     }
                     &__operations{
@@ -438,7 +446,10 @@ body{
             width: 15vw;
             min-width: 150px;
             padding-top: 30px;
-            height: calc(100vh - 60px);
+            position: fixed;
+            left: 0;
+            z-index: 15;
+            height: 100%;
             .aside{
                
                 &-data{
@@ -492,13 +503,13 @@ body{
     }
 }
 
-@media (min-height: 900px) {
-    main{
-        aside{
-            height: 100vh;
-        }
-        .button-group{
-            margin-bottom: 60px;
-        }
-    }
-}
+// @media (min-height: 900px) {
+//     main{
+//         aside{
+//             height: 100vh;
+//         }
+//         // .button-group{
+//         //     margin-bottom: 60px;
+//         // }
+//     }
+// }
