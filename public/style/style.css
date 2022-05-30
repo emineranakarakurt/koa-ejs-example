@@ -100,14 +100,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 10;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .container-interface {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
-  padding: 10px 0;
   z-index: 10;
   overflow-y: auto;
 }
@@ -118,11 +117,12 @@
 }
 
 .container-interface .image-import__view .carte {
+  margin-top: 10px;
   background-color: #0046ca4d;
 }
 
 .container-interface .image-import__view .carte .divImage {
-  overflow: auto;
+  overflow-y: auto;
   width: 50vw;
   height: 50vh;
   max-width: 500px;
@@ -535,6 +535,11 @@ body header nav {
   color: #ffffff;
 }
 
+body header nav .nav-logo img {
+  width: 80px;
+  height: 80px;
+}
+
 body header nav .nav-links ul {
   -webkit-box-flex: 3;
       -ms-flex-positive: 3;
@@ -543,11 +548,6 @@ body header nav .nav-links ul {
 
 body header nav .nav-links ul li {
   margin: 0 15px;
-}
-
-body header nav .nav-support {
-  position: relative;
-  left: 150px;
 }
 
 body header nav .nav-support img {
@@ -561,10 +561,6 @@ body header nav .nav-support img:nth-child(0n + 3) {
   width: 15px;
 }
 
-body main {
-  min-height: calc(100% - 60px);
-}
-
 body main aside {
   background-color: #ffffff;
   -webkit-box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
@@ -572,20 +568,7 @@ body main aside {
   padding: 10px;
   min-width: 235px;
   padding-top: 30px;
-}
-
-body main aside .aside-logo {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  z-index: 6;
-  position: absolute;
-  top: 0;
-  left: 50px;
-}
-
-body main aside .aside-logo img {
-  width: 80px;
-  height: 80px;
+  height: 100%;
 }
 
 body main aside .aside-data {
@@ -602,8 +585,12 @@ body main aside div {
   border-radius: 4px;
   min-height: 150px;
   padding: 0 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   height: 100%;
+}
+
+body main aside #birdView {
+  margin: 0;
 }
 
 body main .preproject {
@@ -657,7 +644,6 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
   font-family: 'Futura', 'Nunito Sans', sans-serif;
   font-size: 1em;
 }
@@ -677,6 +663,7 @@ a {
 
 main {
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .container {
