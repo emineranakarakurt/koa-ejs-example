@@ -97,7 +97,7 @@ main{
 .btn{
     text-align: center;
     border-radius: 45px;
-    padding: 15px 55px;
+    line-height: 2em;
     border: none;
     &-primary{
         background-color: $bleu-nuit;
@@ -294,7 +294,8 @@ input[type=text], input[type=number]{
 
 .birdView{
     img{
-        height: 50%;
+        height: auto;
+        width: 50%;
     }
 }
 // #upload{
@@ -304,3 +305,5 @@ input[type=text], input[type=number]{
 g.infolayer{
     display: none;
 }
+
+

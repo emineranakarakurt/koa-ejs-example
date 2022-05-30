@@ -105,29 +105,33 @@
 }
 
 .container-interface {
-  width: 100%;
-  height: calc(100vh - 60px);
   background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
+  width: 85vw;
+  background-repeat: no-repeat;
+  background-size: cover;
   z-index: 10;
   overflow-y: auto;
+  height: calc(100vh - 60px);
 }
 
 .container-interface .image-import-duo {
-  width: 100%;
   overflow-y: auto;
 }
 
+.container-interface .image-import__view {
+  margin: 5vh 3vw;
+}
+
 .container-interface .image-import__view .carte {
-  margin-top: 10px;
   background-color: #0046ca4d;
 }
 
 .container-interface .image-import__view .carte .divImage {
   overflow-y: auto;
-  width: 50vw;
-  height: 50vh;
-  max-width: 500px;
-  max-height: 500px;
+  width: 30vw;
+  height: 30vh;
+  max-width: 400px;
+  max-height: 400px;
   cursor: -webkit-grab;
   cursor: grab;
   -webkit-user-select: none;
@@ -151,12 +155,20 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  width: auto;
+  height: 80%;
 }
 
 .container-interface .image-import__view .toolbar {
   background-color: #2D75EE;
   border-radius: 0 0 11px 11px;
-  padding: 5px 25px;
+  padding: 1vh 2vw;
+}
+
+.container-interface .image-import__view .toolbar img {
+  height: 3vh;
+  min-height: 15px;
+  width: auto;
 }
 
 .container-interface .image-import__button {
@@ -191,7 +203,9 @@
   border-top: 1px solid #030233;
   height: 5vh;
   min-height: 40px;
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 85vw;
   color: #030233;
 }
 
@@ -567,7 +581,8 @@ body main aside {
   -webkit-box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
           box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
   padding: 10px;
-  min-width: 235px;
+  width: 15vw;
+  min-width: 150px;
   padding-top: 30px;
   height: calc(100vh - 60px);
 }
@@ -587,7 +602,6 @@ body main aside div {
   min-height: 150px;
   padding: 0 15px;
   margin-bottom: 15px;
-  height: 100%;
 }
 
 body main aside #birdView {
@@ -606,8 +620,6 @@ body main .preproject {
   border-radius: 15px;
   color: #030233;
   margin: auto;
-  width: 30vw;
-  height: 30vh;
   padding: 15px;
 }
 
@@ -629,6 +641,15 @@ body main .preproject-row.openproject {
   width: 100%;
   padding: 15px 0;
   border-radius: 45px;
+}
+
+@media (min-height: 900px) {
+  main aside {
+    height: 100vh;
+  }
+  main .button-group {
+    margin-bottom: 60px;
+  }
 }
 
 * {
@@ -769,7 +790,7 @@ main {
 .btn {
   text-align: center;
   border-radius: 45px;
-  padding: 15px 55px;
+  line-height: 2em;
   border: none;
 }
 
@@ -1002,7 +1023,8 @@ input[type=text], input[type=number] {
 }
 
 .birdView img {
-  height: 50%;
+  height: auto;
+  width: 50%;
 }
 
 g.infolayer {
