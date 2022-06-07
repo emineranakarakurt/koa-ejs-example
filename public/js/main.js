@@ -1,6 +1,8 @@
 //import {tab} from './matrice.js';
-import {base64String} from './base64.js';
-import {result} from './result.js';
+// import {base64String} from './base64.js';
+// import {result} from './result.js';
+//var result = require('result');
+var protobuf = require('protobufjs');
 ////////////////////////////////////////////////////////////////
 if(document.querySelector('.accueil')){
     document.querySelector('aside').style.display = "none";
@@ -9,18 +11,18 @@ if(document.querySelector('.accueil')){
 }
 ///////////////////////////////////////////////////////////////
 //Lancement du serveur Websocket
-const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
-// const ws = new WebSocket("ws://127.0.0.1:8081");
+// const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
+const ws = new WebSocket("ws://127.0.0.1:8081");
 
-const userId = JSON.stringify({
-    header:"REQUEST_CLIENT_ID"
-});
+
 ////////////////////////////////////////////////////////
 var getImg;
 var uid;
 var parsed;
 var file;
 var statusReq;
+var result;
+var message;
 var zoomBtn = document.querySelectorAll(".zoom");
 var dezoomBtn = document.querySelectorAll(".dezoom");
 var imageCarte = document.querySelectorAll(".carte");
@@ -32,86 +34,6 @@ var contrastMoinsBtn = document.querySelectorAll(".contrastMoins");
 var initializeBtn = document.querySelectorAll(".initialize");
 
 /////////////////////////////////////////////////////////////
-
-/* GET_IMAGE_INTERFACE */
-
-var ImageInterface = {
-    tempPath : 'FS/1/0/e28d8de75117d6235de61c6fa55a5fc9f59210955d8a195c979046021915edf5.tif',
-    r : 0,
-    g : 1,
-    b : 2,
-    buffer : '',
-    path : 'FS/1/0/e28d8de75117d6235de61c6fa55a5fc9f59210955d8a195c979046021915edf5.tif',
-    tempPath : 'FS/1/0/e28d8de75117d6235de61c6fa55a5fc9f59210955d8a195c979046021915edf5.tif',
-    isGeoReferenced : false,
-    isOrthoReady : false,
-    filename : "070992.tif",
-    sizeX : 219,
-    sizeY : 216,
-    pixelSizeX : 1,
-    pixelSizeY : 1,
-    imageOrigineX : 0,
-    imageOrigineY : 0,
-    groundSpacingX : 1,
-    groundSpacingY : 1,
-    numberOfBands : 3,
-    sensorId : '',
-    imageId : 0,
-    time : '',
-    driverName : "GeoTIFF",
-    projectionName : "PROJCS[\"unnamed\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unretrievable - using WGS84\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",48.598523],PARAMETER[\"standard_parallel_2\",50.395912],PARAMETER[\"latitude_of_origin\",49.5],PARAMETER[\"central_meridian\",2.337229167],PARAMETER[\"false_easting\",600000],PARAMETER[\"false_northing\",1200000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]]]",
-    adfGeoTransform : [
-        999760.0,
-        20.0,
-        0.0,
-        1116540.0,
-        0.0,
-        -20.0
-      ],
-    latLong : [
-        [
-          7.759132419298201,
-          48.574032980612216,
-          0.0
-        ],
-        [
-          7.818329689008556,
-          48.57118576280115,
-          0.0
-        ],
-        [
-          7.823376643420943,
-          48.61710622338708,
-          0.0
-        ],
-        [
-          7.764125244764069,
-          48.61995607119527,
-          0.0
-        ]
-      ],
-    reader : {
-        "projection": "PROJCS[\"unnamed\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unretrievable - using WGS84\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"standard_parallel_1\",48.598523],PARAMETER[\"standard_parallel_2\",50.395912],PARAMETER[\"latitude_of_origin\",49.5],PARAMETER[\"central_meridian\",2.337229167],PARAMETER[\"false_easting\",600000],PARAMETER[\"false_northing\",1200000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]]]",
-        "geoTransform": [
-          999760.0,
-          20.0,
-          0.0,
-          1116540.0,
-          0.0,
-          -20.0
-        ],
-    },
-    b64Data : base64String,
-    doubleData : '',
-    bands : [
-        true,
-        true,
-        true
-      ],
-};
-// var ImageInterfaceResp = {
-//     ImageInterface 
-// };
 
 /////////////////////////////////////////////////////////////
 var divImage = document.querySelectorAll('.divImage');
@@ -213,277 +135,188 @@ function afficheZoomImg(){
         })
     }
 }
-//Récupère le user id
-ws.addEventListener("open", () => {
-    ws.send(userId);
-});
-var second = false;
-var result2 = [];
-//Récupère le data lorsqu'il reçoit un message
-ws.addEventListener('message',function(event){
-    parsed = JSON.parse(event.data);
-    switch (parsed.header){
-        case "REQUEST_CLIENT_ID":
-            uid = String(parsed.clientId);
-            console.log(parsed);
-            getImg = JSON.stringify({
-                clientId: uid,
-                base64File: null,
-                checksum: "0333ff8c224366dac05ba154f2c6e4d9",
-                isLaunchOrthoRect: false,
-                fileName: "070992.tif",
-                overWrite: false,
-                header: "OPEN_IMAGE",
-            });
 
-            ws.send(getImg);
-                break;
-        case "OPEN_IMAGE_RESPONSE":
-            console.log(parsed);
-            var result = parsed.idData;
+run().catch(err => console.log(err));
 
-            //En fonction du statut de la requete
-            switch(parsed.status){
-                case "FS_IO_EXCEPTION":
-                    console.log(parsed);
-                    getImg = JSON.stringify({
-                        clientId: uid,
-                        base64File: null,
-                        checksum: "0333ff8c224366dac05ba154f2c6e4d9",
-                        isLaunchOrthoRect: false,
-                        fileName: "070992.tif",
-                        overWrite: false,
-                        header: "OPEN_IMAGE",
-                    });
+async function run() {
 
-                    ws.send(getImg);
-                    break;
-                case "TO_UP_LOAD":
-                    console.log(parsed);
-                    getImg = JSON.stringify({
-                        clientId: uid,
-                        base64File: base64String,
-                        checksum: "0333ff8c224366dac05ba154f2c6e4d9",
-                        isLaunchOrthoRect: false,
-                        fileName: "070992.tif",
-                        overWrite: false,
-                        header: "OPEN_IMAGE",
-                    });
-
-                    ws.send(getImg);
-                    break;
-                case "IMAGE_DUPLICATED":
-                    console.log(parsed);
-                    getImg = JSON.stringify({
-                        clientId: uid,
-                        base64File: base64String,
-                        checksum: "0333ff8c224366dac05ba154f2c6e4d9",
-                        isLaunchOrthoRect: false,
-                        fileName: "070992.tif",
-                        overWrite: true,
-                        header: "OPEN_IMAGE",
-                    });
-
-                    ws.send(getImg);
-                    break;
-                case "UP_LOAD_SUCCESS":
-                    console.log(parsed);
-                    getImg = JSON.stringify({
-                        imageInterfaceRequest : {
-                            idMessage: /*parsed.clientId*/result,
-                            // doRescale: false,
-                        },
-                        clientId: uid,
-                        header: "GET_IMAGE_INTERFACE"
-                    });
-                    ws.send(getImg);
-                    break;
-                case "EXISTENT_IMAGE":
-                    console.log(parsed);
-                    getImg = JSON.stringify({
-                        imageInterfaceRequest : {
-                            idMessage: /*parsed.clientId*/result,
-                            // doRescale: false,
-                        },
-                        clientId: uid,
-                        header: "GET_IMAGE_INTERFACE"
-                    });
-                    ws.send(getImg);
-                break;
-                default:
-                    break;
-            }
-                break;
-        case "IMAGE_INTERFACE":
-            console.log(parsed);
-            result2.push(parsed.imageInterf);
-            console.log('result 2 : ' , result2[0]);
-            getImg = JSON.stringify({
-                bufferedImageRequest : {
-                    idMessage: result,
-                    doRescale: false,
-                },
-                clientId: uid,
-                header: "GET_BUFFER_IMAGE"
-            });
-
-            ws.send(getImg);
-                break;
-        case "BUFFERED_IMAGE":
-            console.log('buffered img', parsed);
-            base64String;
-            afficheZoomImg();
-            if(!second){
-                console.log(ImageInterface);
-                getImg = JSON.stringify({
-                    images : result2,
-                    mask : null,
-                    samplingMethod : 2,
-                    paramSamplingMethode : 1.0,
-                    idPercentage : 0,
-                    nameData : "070992.tif(Mono)",
-                    clientId: uid,
-                    header: "CREATE_DATA_IMAGE"
-                });
-    
-                ws.send(getImg);
-            }else{
-                console.log(parsed);
-                getImg = JSON.stringify({
-                    rootClassificationRequest:{
-                        idClassif: 1,
-                    },
-                    clientId: uid,
-                    header: "GET_ROOT_CLASSIFICATION"
-                });
-                ws.send(getImg);
-            }
-                break;
-        case "DATA_IMAGE":
-            console.log(parsed);
-            getImg = JSON.stringify({
-                dataInterfaceRequest: {
-                    id : 0,
-                },
-                clientId: uid,
-                header: "GET_DATA_INTERFACE_BY_ID"
-            });
-            ws.send(getImg);
-            break;
-        //////////////////////////
-        //CREATE CLASSIFICATION//
-        /////////////////////////
-        case "DATA_INTERFACE":
-            console.log(parsed);
-            getImg = JSON.stringify({
-                idData : parsed.IDData,
-                isHybrid: false,
-                isMaclaw: false,
-                idData: parsed.IDData,
-                choiceApproach: 1,
-                distanceUse: 1,
-                type: "utils.ParamClassifSimple",
-                selectedMethod: 1,
-                paramClustering: [
-                    10.0,
-                    10.0
-                ],
-                weightsParam: [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                hClustering: false,
-                clientId: uid,
-                header: "CREATE_CLASSIFICATION"
-            });
-
-            ws.send(getImg);
-            break;
-        case "CLASSIFICATION_RESPONSE_CODE":
-            console.log(parsed);
-            var currentClassifID = parsed.code;
-            getImg = JSON.stringify({
-                // finishRequest: {
-                    idClassif: String(parsed.code),
-                // },
-                clientId: uid,
-                header: "GET_FINISH"
-            });
-            ws.send(getImg);
-            break;
-        case "FINISH_RESULT":
-            console.log(parsed);
-            if(parsed.finish != 100){
-                getImg = JSON.stringify({
-                    // finishRequest: {
-                        idClassif: String(currentClassifID),
-                    // },
-                    clientId: uid,
-                    header: "GET_FINISH"
-                });    
-            }
-            getImg = JSON.stringify({
-                // resultClassification: {
-                    idClassif: String(currentClassifID),
-                // },
-                clientId: uid,
-                header: "GET_RESULT_CLASSIFICATION"
-            })
-            ws.send(getImg);
-            break;
-        case "RESULT_CLASSIFICATION":
-            console.log(parsed);
-            second = true;
-            result2 = parsed.imageInterf;
-            getImg = JSON.stringify({
-                // bufferedImageRequest: {
-                    idMessage: result, 
-                    doRescale: false,
-                // },
-                clientId: uid,
-                header: "GET_BUFFER_IMAGE"
-            });
-
-            ws.send(getImg);
-            break;
-        // //BUFFERED_IMAGE
-        // case "ROOT_CLASSIFICATION":
-        //     getImg = JSON.stringify({
-        //         idClassif: '',
-        //         clientId: uid,
-        //         header: "GET_MATRICE"
-        //     });
-
-        //     ws.send(getImg);
-        //     break;
-        // case "MATRICE":
-        //     getImg = JSON.stringify({
-        //         idClassification: '',
-        //         type: '',
-        //         nbObject: '',
-        //         clientId: uid,
-        //         header: "GET_SCALING"
-        //     });
-
-        //     ws.send(getImg);
-        //     break;
-        // case "SCALING":
-        //     getImg = JSON.stringify({
-        //         idClassification: '',
-        //         method: '',
-        //         type: '',
-        //         dim: '',
-        //         nbObject: '',
-        //         clientId: uid,
-        //     });
-
-        //     ws.send(getImg);
-        //     break;
-        default:
-            break;
+    const root = await protobuf.load("../protobuf/Messages.proto");
+    const Req = root.lookupType("FoDoMustProto.RequestMessage");
+    const Resp = root.lookupType("FoDoMustProto.ResponseMessage");
+        
+    function snd(msg){
+        connection.sendBytes(Req.encode(Req.create(msg)).finish());
     }
-});
+
+    //Récupère le user id
+    ws.addEventListener("open", () => {
+        console.log(1);
+        ws.snd({header:14});
+    });
+    var second = false;
+    var result2 = [];
+    //Récupère le data lorsqu'il reçoit un message
+
+    ws.addEventListener('message', function(event) {
+        console.log(1);
+        message = Resp.decode(event.binaryData);
+        console.log(message);
+        //"Chargement d'image" -> "Génération de donnée" -> "Lancer une classification simple utilisant KMeans"
+        switch (message.header){
+                    case 42:
+                        uid = message.responseClientBody.clientID;
+                        ws.snd({
+                            imageOpenRequest:{
+                                base64File: file,
+                                checksum: "0333ff8c224366dac05ba154f2c6e4d9",
+                                isLaunchOrthoRect: false,
+                                fileName: "070992.tif",
+                                overWrite: true
+                            },
+                            clientId: uid,
+                            header: 20
+                        }); break;
+                    case 16:
+                        result = message.imageOpenResp.idData;
+                        ws.send({
+                            imageInterfaceRequest:{
+                                idMessage: result
+                            },
+                            clientId: uid,
+                            header: 21
+                        }); break;
+                    case 17:
+                        result2.push(message.imageInterfaceResp.imageInterf);
+                        ws.send({
+                            bufferedImageRequest:{
+                                idMessage: result,
+                                doRescale: false
+                            },
+                            clientId: uid,
+                            header: 22
+                        }); break;
+                    // create data image
+                    case 18:
+                        getImg.base64File = message.bufferedImageResp.base64File;
+                        fs.writeFileSync(__dirname+"/demo.tif", getImg.base64File);
+                        //afficheZoomImg();
+                        if (!second)
+                        ws.send({
+                                dataImageRequest:{
+                                    images: result2,
+                                    mask: [
+                                        {path:"."}
+                                    ],
+                                    samplingMethod: 1,
+                                    paramSamplingMethode: 4.0,
+                                    idPercentage: 5,
+                                    nameData: ""
+                                },
+                                clientId: uid,
+                                header: 23
+                            });
+                        else
+                            /*MONO_STRATEGY_APPROACH 			= 1;
+                            MULTI_STRATEGY_APPROACH 		= 2;
+                            MULTI_STRATEGY_ETC_APPROACH 	= 3;
+                            MACLAW_APPROACH 				= 4;
+                            VOTING_APPROACH 				= 5;
+                            MULTIRESOLUTION_APPROACH 		= 6;
+                            IMPORT_APPROACH 				= 7; */
+                            ws.send({
+                                rootClassificationRequest:{
+                                    idClassif: 1
+                                },
+                                clientId: uid,
+                                header: 18
+                            });
+                        break;
+                    case 19:
+                        ws.send({
+                            dataInterfaceRequest:{
+                                id: message.dataImageResp.dataImageId
+                            },
+                            clientId: uid,
+                            header: 1
+                        });break;
+                    // create classification
+                    case 3:
+                        //mcb.IDData;
+                        //mcb.b64DataInterface;
+                        //mcb.dataInterface;
+                        ws.send({
+                            classificationRequest:{
+                                idData: message.dataInterfaceResp.IDData,
+                                classification: {
+                                    isHybrid: false,
+                                    isMaclaw: false,
+                                    idData: event.dataInterfaceResp.IDData,
+                                    choiceApproch: 1,
+                                    distanceUse: 1,
+                                    type: "utils.ParamClassifSimple",
+                                    selectedMethod: "0",
+                                    paramClustering: [
+                                        10.0,
+                                        10.0
+                                    ],
+                                    weightsParam: [
+                                        1.0,
+                                        1.0,
+                                        1.0
+                                    ],
+                                    hClustering: false
+                                }
+                            },
+                            clientId: uid,
+                            header: 2
+                        });break;
+                    case 6:
+                        //mcb.code;
+                        currentClassifID = message.classificationResp.code;
+                        ws.send({
+                            finishRequest:{
+                                idClassif: String(message.classificationResp.code)
+                            },
+                            clientId: uid,
+                            header: 15
+                        });break;
+                    case 12:
+                        //mcb.finish
+                        if (message.finishResp.finish!='100') {
+                            ws.send({
+                                finishRequest:{
+                                    idClassif: String(currentClassifID)
+                                },
+                                clientId: uid,
+                                header: 15
+                            });break;
+                        }
+                        ws.send({
+                            resultClassificationRequest:{
+                                idClassif: String(currentClassifID)
+                            },
+                            clientId: uid,
+                            header: 9
+                        });break;
+                    case 7:
+                        //mcb.resultClassification
+                        second = true;
+                        result2.push(message.resultClassificationResp.imageInterf);
+                        ws.send({
+                            bufferedImageRequest:{
+                                idMessage: result,
+                                doRescale: false
+                            },
+                            clientId: uid,
+                            header: 22
+                        });
+                        break;
+                    //case 15:console.log( Date.now() - start);break;
+                    default: break;
+        }
+    });
+};
+
 ///carte de différence
 const differenceCard = document.querySelector('.difference');
 
@@ -608,111 +441,121 @@ if(statsResults){
     })
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("click", e => {
+        if (e.target.matches("[data-link]")) {
+            e.preventDefault();
+            navigateTo(e.target.href);
+        }
+    });
+
+    router();
+});
 
 //////////////////////////////////////////////////////
 ///////Affichage tableau après classification////////
 ////////////////////////////////////////////////////
 
-var newTab = [];
-var height = 218;
-var width = 255;
+// var newTab = [];
+// var height = 218;
+// var width = 255;
 
-function toColor(num) {
-    num >>>= 0;
-    var b = num & 0xFF,
-        g = (num & 0xFF00) >>> 8,
-        r = (num & 0xFF0000) >>> 16,
-        a = ((num & 0xFF000000) >>> 24) / 255;
-    return "rgba(" + [r, g, b, a].join(",") + ")";
-}
-function hexify(color) {
-    var values = color
-      .replace(/rgba?\(/, '')
-      .replace(/\)/, '')
-      .replace(/[\s+]/g, '')
-      .split(',');
-    var a = parseFloat(values[3] || 1),
-        r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
-        g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
-        b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
-    return "#" +
-      ("0" + r.toString(16)).slice(-2) +
-      ("0" + g.toString(16)).slice(-2) +
-      ("0" + b.toString(16)).slice(-2);
-  }
-var colorscaleValue = [];
-for (let i = 0; i < 10; i++) {
-    let tab = [];
-    let number = '0.' + i;
-    tab.push(parseFloat(number));
-    console.log(result._clusterColor);
-    tab.push(toColor(result._clusterColor[i].value));
-    colorscaleValue.push(tab);
-}
-colorscaleValue.push([1,
-    toColor(result._clusterColor[9].value)
-]);
-var colorTabInput = [];
-for(let i = 0; i < colorscaleValue.length; i++){
-    colorTabInput.push(hexify(colorscaleValue[i][1]));
-}
-console.log(colorscaleValue);
-for (let i = height; i > 0; i--) {
-    let tabTab = [];
-    for (let j = width; j > 0; j--) {
-        tabTab.push(result.clusterMap[i * height + j]);
-    }
-    newTab.push(tabTab);
-}
-console.log(newTab);
-var data = [{
-    z: newTab,
-    type: 'heatmap',
-    colorscale: colorscaleValue,
-}];
-if(document.querySelector('#myDiv')){
-    Plotly.newPlot('myDiv', data);
-}
+// function toColor(num) {
+//     num >>>= 0;
+//     var b = num & 0xFF,
+//         g = (num & 0xFF00) >>> 8,
+//         r = (num & 0xFF0000) >>> 16,
+//         a = ((num & 0xFF000000) >>> 24) / 255;
+//     return "rgba(" + [r, g, b, a].join(",") + ")";
+// }
+// function hexify(color) {
+//     var values = color
+//       .replace(/rgba?\(/, '')
+//       .replace(/\)/, '')
+//       .replace(/[\s+]/g, '')
+//       .split(',');
+//     var a = parseFloat(values[3] || 1),
+//         r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
+//         g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
+//         b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
+//     return "#" +
+//       ("0" + r.toString(16)).slice(-2) +
+//       ("0" + g.toString(16)).slice(-2) +
+//       ("0" + b.toString(16)).slice(-2);
+//   }
+// var colorscaleValue = [];
+// for (let i = 0; i < 10; i++) {
+//     let tab = [];
+//     let number = '0.' + i;
+//     tab.push(parseFloat(number));
+//     console.log(result._clusterColor);
+//     tab.push(toColor(result._clusterColor[i].value));
+//     colorscaleValue.push(tab);
+// }
+// colorscaleValue.push([1,
+//     toColor(result._clusterColor[9].value)
+// ]);
+// var colorTabInput = [];
+// for(let i = 0; i < colorscaleValue.length; i++){
+//     colorTabInput.push(hexify(colorscaleValue[i][1]));
+// }
+// console.log(colorscaleValue);
+// for (let i = height; i > 0; i--) {
+//     let tabTab = [];
+//     for (let j = width; j > 0; j--) {
+//         tabTab.push(result.clusterMap[i * height + j]);
+//     }
+//     newTab.push(tabTab);
+// }
+// console.log(newTab);
+// var data = [{
+//     z: newTab,
+//     type: 'heatmap',
+//     colorscale: colorscaleValue,
+// }];
+// if(document.querySelector('#myDiv')){
+//     Plotly.newPlot('myDiv', data);
+// }
 
-const tableCluster = document.querySelector('.right-side__infos div');
-if(tableCluster){
-    let table = document.createElement('table');
-    tableCluster.appendChild(table);
-    for(let i = 0; i < 3; i++){
-        let tr = document.createElement('tr');
-        table.appendChild(tr);
-        let th = document.createElement('th');
+// const tableCluster = document.querySelector('.right-side__infos div');
+// if(tableCluster){
+//     let table = document.createElement('table');
+//     tableCluster.appendChild(table);
+//     for(let i = 0; i < 3; i++){
+//         let tr = document.createElement('tr');
+//         table.appendChild(tr);
+//         let th = document.createElement('th');
         
-        switch(i){
-            case 0:
-                th.textContent = "Name";
-                break;
-            case 1:
-                th.textContent = "Color";
-                break;
-            case 2: 
-                th.textContent = "Cardinality";
-                break;
-        }
-        tr.appendChild(th);
-        for(let j = 0; j < colorscaleValue.length - 1; j++){
-            let td = document.createElement('td');
-            switch(i){
-                case 0:
-                    td.textContent = "Cluster " + (j + 1); 
-                    break;
-                case 1:
-                    let inputColor = document.createElement('input');
-                    inputColor.type = "color";
-                    inputColor.value = colorTabInput[j];
-                    console.log(colorTabInput);
-                    td.appendChild(inputColor);
-                    break;
-                case 2: 
-                    td.textContent = result._cardinalityCluster[j];
-                    break;
-            }
-            tr.appendChild(td);
-        }
-    }
-}
+//         switch(i){
+//             case 0:
+//                 th.textContent = "Name";
+//                 break;
+//             case 1:
+//                 th.textContent = "Color";
+//                 break;
+//             case 2: 
+//                 th.textContent = "Cardinality";
+//                 break;
+//         }
+//         tr.appendChild(th);
+//         for(let j = 0; j < colorscaleValue.length - 1; j++){
+//             let td = document.createElement('td');
+//             switch(i){
+//                 case 0:
+//                     td.textContent = "Cluster " + (j + 1); 
+//                     break;
+//                 case 1:
+//                     let inputColor = document.createElement('input');
+//                     inputColor.type = "color";
+//                     inputColor.value = colorTabInput[j];
+//                     console.log(colorTabInput);
+//                     td.appendChild(inputColor);
+//                     break;
+//                 case 2: 
+//                     td.textContent = result._cardinalityCluster[j];
+//                     break;
+//             }
+//             tr.appendChild(td);
+//         }
+//     }
+// }

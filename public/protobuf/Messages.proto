@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.sdc_icube.FodoMustService.proto";
+//option java_outer_classname = "FoDoMustProto";
+
+// This declaration works as Protocol Buffers name space
+package FoDoMustProto;
+
+import "Protocol.proto";
+import "MessageBody.proto";
+
+message RequestMessage {
+  RequestHeaders header = 1;
+  DataInterfaceIDRequest dataInterfaceIDRequest = 2;
+  DataInterfaceRequest dataInterfaceRequest = 3;
+  NormRequest normRequest = 4;
+  ImputationRequest imputationRequest = 5;
+  BorneRequest borneRequest = 6;
+  FilterDataRequest filterDataRequest = 7;
+  AnalyseRequest analyseRequest = 8;
+  DataRequest dataRequest = 9;
+  ClassificationRequest classificationRequest = 10;
+  Segmentation2DataRequest segmentation2DataRequest = 11;
+  FinishRequest finishRequest = 12;
+  ResultClassificationRequest resultClassificationRequest = 13;
+  InfoClassifHybrideRequest infoClassifHybrideRequest = 14;
+  ScalingRequest scalingRequest = 15;
+  MatriceDistanceRequest matriceDistanceRequest = 16;
+  RootClassificationRequest rootClassificationRequest = 17;
+  ClusterViewIdRequest clusterViewIdRequest = 18;
+  ImageInterfaceRequest imageInterfaceRequest = 19;
+  ImageOpenRequest imageOpenRequest = 20;
+  BufferedImageRequest bufferedImageRequest = 21;
+  DataImageRequest dataImageRequest = 22;
+  SegmentationRequest segmentationRequest = 23;
+  UpdateSegmentationRequest updateSegmentationRequest = 24;
+  FetchSampleIndexesRequest fetchSampleIndexesRequest = 25;
+  EstimateDistanceRequest estimateDistanceRequest = 26;
+  UpdateConstraintsRequest updateConstraintsRequest = 27;
+  CreateAHCRequest createAHCRequest = 28;
+  GetHistoricRequest getHistoricRequest = 29;
+  string clientId = 30;
+}
+
+message ResponseMessage {
+  ResponseHeaders header = 1;
+  Status status = 2;
+  ResponseClientIDBody responseClientBody = 3;
+  DataInterfaceIDResponse dataInterfaceIDResponse = 4;
+  DataInterfaceResp dataInterfaceResp = 5;
+  AnalyseResp analyseResp = 6;
+  DataResp dataResp = 7;
+  ClassificationResp classificationResp = 8;
+  SegmentationToDataResp segmentationToDataResp = 9;
+  FinishResp finishResp = 10;
+  ResultClassificationResp resultClassificationResp = 11;
+  ResultClassificationFinalResp resultClassificationFinalResp = 12;
+  ResultClassificationInitialResp resultClassificationInitialResp = 13;
+  InfoClassifHybrideResp infoClassifHybrideResp = 14;
+  ScalingResp scalingResp = 15;
+  MatriceDistanceResp matriceDistanceResp = 16;
+  RootClassificationResp rootClassificationResp = 17;
+  ClusterViewIdResp clusterViewIdResp = 18;
+  ImageOpenResp imageOpenResp = 19;
+  ImageInterfaceResp imageInterfaceResp = 20;
+  BufferedImageResp bufferedImageResp = 21;
+  DataImageResp dataImageResp = 22;
+  SegmentationResp segmentationResp = 23;
+  SampleIndexesResp sampleIndexesResp = 24;
+  EstimateDistanceResp estimateDistanceResp = 25;
+  UpdateConstraintsResp updateConstraintsResp = 26;
+  CreateAHCResp createAHCResp = 27;
+  GetHistoricResp getHistoricResp = 28;
+}
+
+

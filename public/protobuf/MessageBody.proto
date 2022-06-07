@@ -1,0 +1,316 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.sdc_icube.FodoMustService.proto";
+//option java_outer_classname = "FoDoMustProto";
+import "google/protobuf/any.proto";
+
+// This declaration works as Protocol Buffers name space
+package FoDoMustProto;
+
+import "FoDoMust.proto";
+
+/* REQUEST_CLIENT_ID */
+message RequestClientIDBody {
+}
+
+/* REQUEST_CLIENT_ID */
+message ResponseClientIDBody {
+  string clientID = 1;
+}
+
+/* CSV_TO_DATA */
+message DataInterfaceIDRequest {
+	string base64File = 1;
+    string delimiteur = 2;
+    int32 mode = 3;
+    string nameData = 4;
+}
+
+/* CSV_TO_DATA */
+message DataInterfaceIDResponse {
+  int32 idData = 1;
+}
+
+/* GET_DATA_INTERFACE_BY_ID */
+message DataInterfaceRequest {
+	int32 id = 1;
+}
+
+/* GET_DATA_INTERFACE_BY_ID */
+message DataInterfaceResp {
+  	int32 IDData = 1;
+	string b64DataInterface = 2;
+	DataInterface dataInterface = 3;
+}
+
+/* APPLY_NORMALISATION */
+message NormRequest {
+    int32 idData = 1;
+    int32 normalisationType = 2;
+}
+
+/* APPLY_IMPUTATION */
+message ImputationRequest {
+    int32 idData = 1;
+    int32 imputationType = 2;
+    double value = 3;
+}
+
+/* APPLY_BORNE */
+message BorneRequest {
+    int32 idData = 1;
+    repeated sdata borne = 2;
+}
+
+/* APPLY_FILTER_DATA */
+message FilterDataRequest {
+    int32 idData = 1;
+}
+
+/* GET_ANALYSIS */
+message AnalyseRequest {
+    int32 idData = 1;
+    double percentage = 2;
+}
+
+/* GET_ANALYSIS */
+message AnalyseResp {
+	repeated int32 analysis = 1;
+}
+
+/* GET_DATA_BY_ID */
+message DataRequest {
+    int32 idData = 1;
+}
+
+/* GET_DATA_BY_ID */
+message DataResp {
+	Data data = 1;
+}
+
+/* CREATE_CLASSIFICATION */
+message ClassificationRequest {
+    int32 idData = 1;
+    ParamClassification classification = 2;
+}
+
+/* CREATE_CLASSIFICATION */
+message ClassificationResp {
+	int32 code = 1;
+}
+
+/* SEGMENTATION_RESULT2DATA */
+message Segmentation2DataRequest {
+    int32 idSegmentation = 1;
+}
+
+/* SEGMENTATION_RESULT2DATA */
+message SegmentationToDataResp {
+	int32 dataId = 1;
+}
+
+/* GET_FINISH */
+message FinishRequest {
+    int32 idClassif = 1;
+}
+
+/* GET_FINISH */
+message FinishResp {
+	int32 finish = 1;
+}
+
+/* GET_RESULT_CLASSIFICATION */
+message ResultClassificationRequest {
+    int32 idClassif = 1;
+}
+
+/* GET_RESULT_CLASSIFICATION */
+message ResultClassificationResp {
+	ResultClassification resultClassification = 1;
+}
+
+/* GET_RESULT_FINAL */
+message ResultClassificationFinalResp {
+	repeated ResultClassification resultClassification = 1;
+}
+
+/* GET_RESULT_INITIAL */
+message ResultClassificationInitialResp {
+	repeated ResultClassification resultClassification = 1;
+}
+
+/* GET_INFO_CLASSIF_HYBRID */
+message InfoClassifHybrideRequest {
+    int32 idClassif = 1;
+}
+
+/* GET_INFO_CLASSIF_HYBRID */
+message InfoClassifHybrideResp {
+	InfoHybrideClassif infoClassifHybrid = 1;
+}
+
+/* GET_SCALING */
+message ScalingRequest {
+    int32 idClassification = 1;
+    int32 methode = 2;
+    int32 type = 3;
+    int32 dim = 4;
+    int32 nbObject = 5;
+}
+
+/* GET_SCALING */
+message ScalingResp {
+	ScalingMethodeResult scalingMethodeResult = 1;
+}
+
+/* GET_MATRICE */
+message MatriceDistanceRequest {
+    int32 idClassification = 1;
+    int32 type = 2;
+    int32 nbObject = 3;
+}
+
+/* GET_MATRICE */
+message MatriceDistanceResp {
+	MatriceDistanceResult matriceDistanceResult = 1;
+}
+
+/* GET_ROOT_CLASSIFICATION */
+message RootClassificationRequest {
+    int32 idClassif = 1;
+}
+
+/* GET_ROOT_CLASSIFICATION */
+message RootClassificationResp {
+	DefaultMutableTreeNode treeNode = 1;
+}
+
+/* GET_CLUSTER_VIEW_ID */
+message ClusterViewIdRequest {
+    int32 idClassification = 1;
+}
+
+/* GET_CLUSTER_VIEW_ID */
+message ClusterViewIdResp {
+	repeated sstring clusterViewId = 1;
+}
+
+/* OPEN_IMAGE */
+message ImageOpenRequest {
+    string base64File = 1;
+    string checksum = 2;
+    bool isLaunchOrthoRect = 3;
+    string fileName = 4;
+    bool overWrite = 5;
+}
+
+/* OPEN_IMAGE */
+message ImageOpenResp {
+	int32 idData = 1;
+}
+
+/* GET_IMAGE_INTERFACE */
+message ImageInterfaceRequest {
+    int32 idMessage = 1;
+}
+
+/* GET_IMAGE_INTERFACE */
+message ImageInterfaceResp {
+	ImageInterface imageInterf = 1;
+}
+
+/* GET_BUFFER_IMAGE */
+message BufferedImageRequest {
+    int32 idImage = 1;
+    bool doRescale = 2;
+}
+
+/* GET_BUFFER_IMAGE */
+message BufferedImageResp {
+	string base64File = 1;
+}
+
+/* CREATE_DATA_IMAGE */
+message DataImageRequest {
+    repeated ImageInterface images = 1;
+    repeated File mask = 2;
+    int32 samplingMethod = 3;
+    double paramSamplingMethode = 4;
+    int32 idPercentage = 5;
+    string nameData = 6;
+}
+
+/* CREATE_DATA_IMAGE */
+message DataImageResp {
+	int32 dataImageId = 1;
+}
+
+/* REQUEST_SEGMENTATION */
+message SegmentationRequest {
+    map<string, google.protobuf.Any> listParams = 1;
+    int32 segID = 2;
+}
+
+/* REQUEST_SEGMENTATION */
+message SegmentationResp {
+	string encodedResult = 1;
+}
+
+/* UPDATE_SEGMENTATION */
+message UpdateSegmentationRequest {
+	int32 segID = 1;
+    bool deploy = 2;
+    Point pointWithReelCoordinates = 3;
+}
+
+/* FETCH_SAMPLE_INDEXES */
+message FetchSampleIndexesRequest {
+	int32 dataId = 1;
+}
+
+/* FETCH_SAMPLE_INDEXES */
+message SampleIndexesResp {
+	repeated int32 indexes = 1;
+}
+
+/* ESTIMATE_DISTANCE */
+message EstimateDistanceRequest {
+	int32 dataId = 1;
+}
+
+/* ESTIMATE_DISTANCE */
+message EstimateDistanceResp {
+	double minDistance = 1;
+    double maxDistance = 2;
+}
+
+/* UPDATE_CONSTRAINTS */
+message UpdateConstraintsRequest {
+	int32 dataId = 1;
+	repeated ConstraintInterface constraints = 2;
+}
+
+/* UPDATE_CONSTRAINTS */
+message UpdateConstraintsResp {
+	bool success = 1;
+}
+
+/* CREATE_AHC_CLASSIFICATION */
+message CreateAHCRequest {
+	int32 idClassification = 1;
+}
+
+/* CREATE_AHC_CLASSIFICATION */
+message CreateAHCResp {
+	int32 classifID = 1;
+}
+
+/* GET_HISTORIC */
+message GetHistoricRequest {
+}
+
+/* GET_HISTORIC */
+message GetHistoricResp {
+	repeated google.protobuf.Any historic = 1;
+}

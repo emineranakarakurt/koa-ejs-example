@@ -1,0 +1,431 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.sdc_icube.FodoMustService.proto";
+//option java_outer_classname = "FoDoMustProto";
+import "google/protobuf/any.proto";
+
+// This declaration works as Protocol Buffers name space
+package FoDoMustProto;
+
+/* Attributes */
+message NumericalAttribute {
+    double value = 1;
+}
+
+message MultiDimSequenceAttribute {
+    message Sequences {
+        message OneDate {
+            repeated double values = 1;
+        }
+        repeated OneDate dates  = 1;
+    }
+    Sequences value = 1;
+}
+
+message SpatialAttribute {
+    repeated int32 values = 1;
+}
+
+
+message sdata {
+	repeated double items = 1;
+}
+message ssdata {
+	repeated sdata items = 1;
+}
+
+message DataInterface {
+	int32 BY_MEAN = 1;
+    int32 BY_MEDIAN = 2;
+    int32 BY_EXTRAPOLATION = 3;
+    int32 BY_VALUE = 4;
+    int32 MIN_MAX = 5;
+    int32 STANDARD_SCALE = 6;
+    repeated sdata statsData = 7;
+    repeated ssdata _data = 8;
+    repeated int32 idObject = 9;
+    int32 idData = 10;
+    string dataName = 11;
+    repeated string attributeName = 12;
+    int32 nbClass = 13;
+    bool isSequence = 14;
+    bool isMultidim = 15;
+    bool dataNull = 16;
+    repeated int32 sampleIndexes = 17;
+}
+
+
+/* Data Object */
+
+message sstring {
+	repeated string item = 1;
+}
+
+message Constraint {
+	int32 LABEL_TYPE = 1;
+    int32 MUST_LINK_TYPE = 2;
+    int32 CANNOT_LINK_TYPE = 3;
+    int32 NB_CLUSTER_TYPE = 4;
+    int32 CLUSTER_DIAMETER_TYPE = 5;
+}
+
+message Attribute {
+	string INTERVAL_ATTRIBUTE = 1;
+    string NULERICAL_ATTRIBUTE = 2;
+    string SEQUENCE_ATTRIBUTE = 3;
+    string MULTIDIM_SEQUENCE_ATTRIBUTE = 4;
+    string STRUCTURED_ATTRIBUTE = 5;
+    string SYMBOLIC_ATTRIBUTE = 6;
+    string SYMBOLIC_HISTOGRAMS_ATTRIBUTE = 7;
+    string REGION_SET_ATTRIBUTE = 8;
+    int64 serialVersionUID = 9;
+}
+
+message DataObject {
+	int64 serialVersionUID = 1;
+    int32 pos = 2;
+    int32 knowFromOntology = 3;
+    repeated Attribute attributes = 4;
+    int32 id = 5;
+}
+
+message Normalisation {
+	int32 MIN_MAX = 1;
+    int32 STANDARD_SCALE = 2;
+    int32 type = 3;
+    repeated double min = 4;
+    repeated double max = 5;
+    repeated double mean = 6;
+    repeated double standardDerivation = 7;
+}
+
+message DistanceParameter {}
+
+message Distance {}
+
+message MetaDistance {}
+
+message Average {}
+
+message DistanceModel {
+	repeated Distance distances = 1;
+    MetaDistance metaDistance = 2;
+    repeated Average averages = 3;
+}
+
+message Agglomerate {
+	bool visible = 1;
+    repeated DataObject content = 2;
+    DataObject gravityCenter = 3;
+    Agglomerate subAgglomerate1 = 4;
+    Agglomerate subAgglomerate2 = 5;
+}
+
+message AgglomerateEvidence {
+	int32 currentNum = 1;
+    int32 numLeaf = 2;
+    bool root = 3;
+    repeated int32 content = 4;
+    int32 numero = 5;
+    int32 associatedLeafCluster = 6;
+    AgglomerateEvidence subAgglomerate1 = 7;
+    AgglomerateEvidence subAgglomerate2 = 8;
+}
+
+message QualityIndex {
+	int32 MAX = 1;
+    int32 MIN = 2;
+    int64 serialVersionUID = 3;
+    string name = 4;
+    int32 optimization = 5;
+    double value = 6;
+}
+
+message ClusteringQuality {
+	int64 serialVersionUID = 1;
+    repeated QualityIndex accuracy = 2;
+    int32 nbClusters = 3;
+    repeated QualityIndex quality = 4;
+    int64 time = 5;
+}
+
+message Color {}
+
+message Weights {
+	int32 MAX = 1;
+    int32 NORM = 2;
+    int32 SUM = 3;
+    int64 serialVersionUID = 4;
+    double totalWeights = 5;
+    double maxi = 6;
+    repeated double weights = 7;
+    repeated Weights subweights = 8;
+}
+
+message Cluster {
+	int64 serialVersionUID = 1;
+    ClusteringResult result = 2;
+    DataObject clusterCenter = 3;
+    Color color = 4;
+    Color couleur_pere = 5;
+    int32 id = 6;
+    bool locked = 7;
+    string name = 8;
+    bool visible = 9;
+    Weights weights = 10;
+}
+
+message DefaultMutableTreeNode {}
+
+message ClassificationWeights {
+	int64 serialVersionUID = 1;
+}
+
+message LDistanceParameter {
+	repeated DistanceParameter items = 1;
+}
+
+message AverageParameter {}
+
+message LearningParameters {
+	int64 serialVersionUID = 1;
+    ClassificationWeights weights = 2;
+    bool hClustering = 3;
+    DistanceModel distanceModel = 4;
+    repeated LDistanceParameter distanceParameters = 5;
+    repeated AverageParameter averageParameters = 6;
+    repeated DataObject samples = 7;
+}
+
+message LearningResult {
+	int64 serialVersionUID = 1;
+    LearningParameters params = 2;
+    repeated int32 qualityIndices = 3;
+    ClassificationWeights weights = 4;
+    repeated double bestFitness = 5;
+    Data data = 6;
+    repeated Color colors = 7;
+    int32 progress = 8;
+    int32 progressM = 9;
+    string statusName = 10;
+}
+
+message ClusteringResult {
+	int64 serialVersionUID = 1;
+    Agglomerate hierarchy = 2;
+    AgglomerateEvidence hierarchyEvidence = 3;
+    repeated int32 associatedTo = 4;
+    ClusteringQuality clusteringQuality = 5;
+    repeated Cluster clusters = 6;
+    DefaultMutableTreeNode clusterTree = 7;
+    Data data = 8;
+    string fileResult = 9;
+    LearningResult learningResult = 10;
+    int32 methode = 11;
+    int32 numero = 12;
+    repeated int32 qualityCriteria = 13;
+    ClassificationWeights weights = 14;
+}
+
+message Mask {}
+
+message Sampler {
+	int32 RANDOM_METHOD_TYPE = 1;
+    int32 INTERVAL_METHOD_TYPE = 2;
+    int64 serialVersionUID = 3;
+    int32 dataSize = 4;
+    int32 dataUnmaskedSize = 5;
+    double sizeByPercent = 6;
+    int32 sizeByCount = 7;
+    Mask mask = 8;
+    int32 samplingMethod = 9;
+}
+
+message Data {
+	int64 serialVersionUID = 1;
+    int32 DEFAULT_TYPE = 2;
+    int32 NOT_IMAGE_FILE_TYPE = 3;
+    int32 IMAGE_TYPE = 4;
+    int32 sequenceMax = 5;
+    repeated ssdata statsData = 6;
+    repeated string attributesNames = 7;
+    repeated sstring subAttributesNames = 8;
+    string comments = 9;
+    repeated Constraint constraints = 10;
+    repeated DataObject currentView = 11;
+    repeated DataObject currentViewAnalyse = 12;
+    repeated Normalisation normalisationList = 13;
+    repeated string dataFilesNames = 14;
+    string dataName = 15;
+    bool noDataNull = 16;
+    repeated int32 dimensions = 17;
+    DistanceModel distanceModel = 18;
+    repeated LDistanceParameter distanceParameters = 19;
+    DataObject gravityCenter = 20;
+    double inertia = 21;
+    bool isFullyInMermory = 22;
+    ClusteringResult knownResult = 23;
+    repeated bool locked = 24;
+    int32 nrDimensions = 25;
+    repeated double constraintsWeights = 26;
+    Mask mask = 27;
+    repeated Attribute max = 28;
+    repeated Attribute min = 29;
+    Sampler sampler = 30;
+    Data sequence = 31;
+    repeated double stdDeviations = 32;
+}
+
+message ParamClassification {}
+
+message vObject {
+	repeated google.protobuf.Any items = 1;
+}
+
+/* ResultClassification */
+message ResultClassification {
+	repeated Color _clusterColor = 1;
+    repeated Color _clusterHierarchicalColor = 2;
+    int32 _idClassification = 3;
+    int32 _numberCluster = 4;
+    repeated int32 _cardinalityCluster = 5;
+    string _typeAttribute = 6;
+    repeated ssdata _centroideValue = 7;
+    repeated ssdata _centroideValueReelValue = 8;
+    repeated ssdata _centroideValueSimplifiedValue = 9;
+    repeated ssdata _centroideValueSimplifiedReelValue = 10;
+    repeated bool _isVisible = 11;
+    repeated string _clusterName = 12;
+    repeated string _attributeName = 13;
+    repeated sstring _subAttributeNames = 14;
+    int32 _nbAttr = 15;
+    repeated vObject _infosCluster = 16;
+    bool _iterativeClassif = 17;
+    bool imageData = 18;
+    repeated int32 clusterMap = 19;
+    repeated int32 clusterMapMask = 20;
+    repeated double weights = 21;
+    bool isCollaborative = 22;
+    int32 classificationTransactionID = 23;
+}
+
+/* InfoHybrideClassif */
+message InfoHybrideClassif {
+	repeated double qualityExterneEvolution = 1;
+    repeated double qualityInterneEvolution = 2;
+    repeated double qualityConstraintsEvolution = 3;
+    repeated double qualityPondereeEvolution = 4;
+    repeated double roiEvolution = 5;
+    repeated double gammaEvolution = 6;
+    int32 idClassif = 7;
+    int32 conflict = 8;
+    repeated int32 tours = 9;
+    repeated vObject history = 10;
+    int32 trend = 11;
+    string infoText = 12;
+    bool isFinish = 13;
+}
+
+/* ScalingMethodeResult */
+message ScalingMethodeResult {
+	repeated sdata coordinates = 1;
+    double stress = 2;
+    repeated int32 clusterMap = 3;
+    repeated int32 pos = 4;
+}
+
+/* MatriceDistanceResult */
+message MatriceDistanceResult {
+	repeated sdata distances = 1;
+    repeated int32 clusterMap = 2;
+    repeated int32 pos = 3;
+    repeated int32 listID = 4;
+}
+
+/* ImageInterface */
+message ReaderWrapper {
+	int64 serialVersionUID = 1;
+    int32 bytesPerPixel = 2;
+    int32 channelCount = 3;
+    int32 channelGap = 4;
+    int32 currentTileWidth = 5;
+    int32 currentTileHeight = 6;
+    int32 endX = 7;
+    int32 endY = 8;
+    repeated sdata extrema = 9;
+    int32 imageWidth = 10;
+    int32 imageHeight = 11;
+    bool isInterLeaved = 12;
+    bool isLittleEndian = 13;
+    int64 maxRAM = 14;
+    int32 optimaleTileWidth = 15;
+    int32 optimaleTileHeight = 16;
+    int32 pixelType = 17;
+    int32 startX = 18;
+    int32 startY = 19;
+    bool tileLoaded = 20;
+    int32 tileX = 21;
+    int32 tileY = 22;
+    int32 tileWidth = 23;
+    int32 tileHeight = 24;
+}
+
+message ImageInterface {
+	string TMP_DIR_PATH = 1;
+    int32 r = 2;
+    int32 g = 3;
+    int32 b = 4;
+    repeated ssdata buffer = 5;
+    string path = 6;
+    string tempPath = 7;
+    bool isGeoReferenced = 8;
+    bool isOrthoReady = 9;
+    string filename = 10;
+    int32 sizeX = 11;
+    int32 sizeY = 12;
+    int32 pixelSizeX = 13;
+    int32 pixelSizeY = 14;
+    double imageOrigineX = 15;
+    double imageOrigineY = 16;
+    double groundSpacingX = 17;
+    double groundSpacingY = 18;
+    int32 numberOfBands = 19;
+    string sensorId = 20;
+    int32 imageId = 21;
+    string time = 22;
+    string driverName = 23;
+    string projectionName = 24;
+    repeated double adfGeoTransform = 25;
+    repeated sdata latLong = 26;
+    ReaderWrapper reader = 27;
+    string b64Data = 28;
+    repeated ssdata doubleData = 29;
+    repeated bool bands = 30;
+}
+
+/* File */
+message File {}
+
+/* Point */
+message Point {
+	int32 x = 1;
+	int32 y = 2;
+}
+
+/* ConstraintInterface */
+message ConstraintInterface {
+	int32 LABEL_TYPE = 1;
+    int32 MUST_LINK_TYPE = 2;
+    int32 CANNOT_LINK_TYPE = 3;
+    int32 NB_CLUSTER_TYPE = 4;
+    int32 CLUSTER_DIAMETER_TYPE = 5;
+    int32 type = 6;
+    double diameter = 7;
+    int32 firstIndex = 8;
+    int32 secondIndex = 9;
+    int32 index = 10;
+    int32 classID = 11;
+    int32 minBoundry = 12;
+    int32 maxBoundry = 13;
+}
