@@ -150,7 +150,9 @@ message ClusteringQuality {
     int64 time = 5;
 }
 
-message Color {}
+message Color {
+    string c = 1;
+}
 
 message Weights {
 	int32 MAX = 1;
@@ -176,7 +178,17 @@ message Cluster {
     Weights weights = 10;
 }
 
-message DefaultMutableTreeNode {}
+message NodeTreeObject {
+    int32 id = 1;
+	string name = 2;
+	Color color = 3;
+	bool visible = 4;
+	int32 card = 5;
+}
+
+message DefaultMutableTreeNode {
+	repeated google.protobuf.Any items = 1;
+}
 
 message ClassificationWeights {
 	int64 serialVersionUID = 1;
@@ -277,7 +289,18 @@ message Data {
     repeated double stdDeviations = 32;
 }
 
-message ParamClassification {}
+message ParamClassification {
+    bool isHybrid = 1;
+    bool isMaclaw = 2;
+    string idData = 3;
+    int32 choiceApproch = 4;
+    int32 distanceUse = 5;
+    string type = 6;
+    string selectedMethod = 7;
+    repeated double paramClustering = 8;
+    repeated double weightsParam = 9;
+    bool hClustering = 10;
+}
 
 message vObject {
 	repeated google.protobuf.Any items = 1;
@@ -384,8 +407,8 @@ message ImageInterface {
     string filename = 10;
     int32 sizeX = 11;
     int32 sizeY = 12;
-    int32 pixelSizeX = 13;
-    int32 pixelSizeY = 14;
+    double pixelSizeX = 13;
+    double pixelSizeY = 14;
     double imageOrigineX = 15;
     double imageOrigineY = 16;
     double groundSpacingX = 17;
@@ -405,7 +428,9 @@ message ImageInterface {
 }
 
 /* File */
-message File {}
+message File {
+	string path = 1;
+}
 
 /* Point */
 message Point {

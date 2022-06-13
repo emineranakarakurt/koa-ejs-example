@@ -1,13 +1,11 @@
-<svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M21.1922 19.1815C21.1922 23.084 17.9786 26.2722 13.9839 26.2722C9.98923 26.2722 6.77563 23.084 6.77563 19.1815C6.77563 15.279 9.98923 12.0908 13.9839 12.0908C17.9786 12.0908 21.1922 15.279 21.1922 19.1815Z" stroke="white" stroke-width="2"/>
-<line x1="13.6678" y1="8.87744" x2="13.6678" y2="6.96695" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="13.6678" y1="31.2617" x2="13.6678" y2="29.3512" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="24.8339" y1="19.126" x2="26.8012" y2="19.126" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="1.16638" y1="19.126" x2="3.13371" y2="19.126" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="1" y1="-1" x2="2.93897" y2="-1" transform="matrix(0.711582 0.702603 -0.712796 0.701371 4.13403 10.2817)" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="1" y1="-1" x2="2.93897" y2="-1" transform="matrix(0.711582 0.702603 -0.712796 0.701371 20.4136 26.4634)" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="1" y1="-1" x2="2.93902" y2="-1" transform="matrix(0.71219 -0.701987 0.71219 0.701987 5.50183 29.7676)" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="1" y1="-1" x2="2.93902" y2="-1" transform="matrix(0.71219 -0.701987 0.71219 0.701987 21.7812 13.3169)" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="27.1478" y1="1.48633" x2="27.1478" y2="6.98941" stroke="white" stroke-width="2" stroke-linecap="round"/>
-<line x1="24.5492" y1="4.62158" x2="30.1613" y2="4.62158" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="13.4999" cy="13.0835" rx="6.46552" ry="6.25" fill="white"/>
+<line x1="14" y1="1" x2="14" y2="4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="14" y1="23" x2="14" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="-1" x2="4" y2="-1" transform="matrix(0.718988 -0.695022 0.718988 0.695022 4.44824 23.1133)" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="-1" x2="4" y2="-1" transform="matrix(0.718988 -0.695022 0.718988 0.695022 20.8276 8.11328)" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="-1" x2="4" y2="-1" transform="matrix(-0.718988 -0.695022 0.718988 -0.695022 23.8755 22.2798)" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="-1" x2="4" y2="-1" transform="matrix(-0.718988 -0.695022 0.718988 -0.695022 8.35815 6.44629)" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="23" y1="13" x2="26" y2="13" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<line x1="1" y1="13" x2="4" y2="13" stroke="white" stroke-width="2" stroke-linecap="round"/>
 </svg>

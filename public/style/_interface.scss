@@ -3,7 +3,7 @@
 .container{
     background-image: url('../images/nasa2.jpg');
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 10;
@@ -12,31 +12,36 @@
 }
 .container-interface{
     background: linear-gradient(67.02deg, #CDDCFB -6.23%, #FFFFFF 104.33%);
-    width: 85vw;
+    width: 100vw;
     background-repeat: no-repeat;
     background-size: cover;
     overflow-y: auto;
     height: calc(100vh - 60px);
     position: absolute;
-right: 0;
+    right: 0;
+    flex-grow: 1;
+    .fil-arianne{
+        margin: 1vh 5vw;
+        a{
+            color: $bleu-nuit;
+        }
+    }
     .image-import
     {
         &-duo{
             overflow-y: auto;
-            
         }
         &__view{
             margin: 5vh 3vw;
             .carte{
-                
-                background-color: $bleu-30;
-                
+                background-color: $blanc;
+                border-radius: 11px 11px 0 0;
                 .divImage{
                     overflow-y: auto;
-                    width: 30vw;
-                    height: 30vh;
-                    max-width: 400px;
-                    max-height: 400px;
+                    width: 45vw;
+                    height: 60vh;
+                    min-height: 150px;
+                    min-height: 150px;
                     cursor: grab;
                     user-select: none;
                     display: flex;
@@ -54,17 +59,21 @@ right: 0;
             .toolbar{
                 background-color: $bleu-saphir;
                 border-radius: 0 0 11px 11px;
-               
                 padding: 1vh 2vw;
+                i{
+                    color: $blanc;
+                    font-size: 25px;
+                    margin: 0 2px;
+                }
                 img{
-                    height: 3vh;
-                    min-height: 15px;
+                    height: 25px;
                     width: auto;
+                    margin: 0 2px;
+                }
+                .contrastPlus{
+                    height: 30px;
                 }
             }
-        }
-        &__button{
-            margin-top: 50px;
         }
     }
     .comparaison{
@@ -93,7 +102,7 @@ right: 0;
         border-top: 1px solid $bleu-nuit;
         height: 5vh;
         min-height: 40px;
-        width: 85vw;
+        width: 100%;
         color: $bleu-nuit;
         .projet-name{
             font-weight: bolder;
@@ -137,11 +146,12 @@ right: 0;
         }
        
     }
-     .button-group{
-            margin-bottom: 5vh;
-        }
+    .button-group{
+        margin-bottom: 5vh;
+    }
     .datapanel{
         width: 95%;
+        height: 100%;
         border: 2px solid $bleu-nuit;
         margin: 10px auto;
         border-radius: 20px;
@@ -196,6 +206,7 @@ right: 0;
         width: 95%;
         border: 2px solid $bleu-nuit;
         margin: 10px auto;
+        height: 100%;
         border-radius: 20px;
         .onglet{
             background-color: $bleu-nuit;
@@ -403,10 +414,13 @@ right: 0;
 body{
     header{
         nav{
-            background: linear-gradient(to top, $bleu-nuit, #06045c);
+            background-color: $bleu-nuit;
             min-height: 60px;
             height: 5vh;
             color: $blanc;
+            i{
+                font-size: 2em;
+            }
             .nav{
                 &-logo{
                     img{
@@ -422,23 +436,29 @@ body{
                             margin: 0 15px;
                         }
                     }
+
                 }
                 &-support{
-                    img{
-                        height: 23px;
-                        width: 23px;
-                        margin: 0 10px;
-                    }
-                    img:nth-child(0n + 3) {
-                        height: 15px;
-                        width: 15px;
-                    }
+                        li{
+                            
+                            img{
+                                height: 23px;
+                                width: 23px;
+                                margin: 0 10px;
+                            }
+                            img:nth-child(0n + 3) {
+                                height: 15px;
+                                width: 15px;
+                            }
+                        }
+                    
                 }
             }
         }
     }
 
     main{
+        flex-grow: 1;
         aside{
             background-color: $blanc;
             box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.25);
@@ -446,10 +466,18 @@ body{
             width: 15vw;
             min-width: 150px;
             padding-top: 30px;
-            position: fixed;
             left: 0;
             z-index: 15;
-            height: 100%;
+            flex-shrink: 0;
+            animation: slide 0.3s ease-in-out;
+            @keyframes slide {
+                0% {
+                    transform: translateX(-100%)
+                }
+                100% {
+                    transform: translateX(0%)
+                }
+            }
             .aside{
                
                 &-data{

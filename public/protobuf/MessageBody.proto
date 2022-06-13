@@ -34,12 +34,12 @@ message DataInterfaceIDResponse {
 
 /* GET_DATA_INTERFACE_BY_ID */
 message DataInterfaceRequest {
-	int32 id = 1;
+	string id = 1;
 }
 
 /* GET_DATA_INTERFACE_BY_ID */
 message DataInterfaceResp {
-  	int32 IDData = 1;
+  	string IDData = 1;
 	string b64DataInterface = 2;
 	DataInterface dataInterface = 3;
 }
@@ -91,7 +91,7 @@ message DataResp {
 
 /* CREATE_CLASSIFICATION */
 message ClassificationRequest {
-    int32 idData = 1;
+    string idData = 1;
     ParamClassification classification = 2;
 }
 
@@ -112,17 +112,17 @@ message SegmentationToDataResp {
 
 /* GET_FINISH */
 message FinishRequest {
-    int32 idClassif = 1;
+    string idClassif = 1;
 }
 
 /* GET_FINISH */
 message FinishResp {
-	int32 finish = 1;
+	string finish = 1;
 }
 
 /* GET_RESULT_CLASSIFICATION */
 message ResultClassificationRequest {
-    int32 idClassif = 1;
+    string idClassif = 1;
 }
 
 /* GET_RESULT_CLASSIFICATION */
@@ -207,12 +207,12 @@ message ImageOpenRequest {
 
 /* OPEN_IMAGE */
 message ImageOpenResp {
-	int32 idData = 1;
+	string idData = 1;
 }
 
 /* GET_IMAGE_INTERFACE */
 message ImageInterfaceRequest {
-    int32 idMessage = 1;
+    string idMessage = 1;
 }
 
 /* GET_IMAGE_INTERFACE */
@@ -243,7 +243,7 @@ message DataImageRequest {
 
 /* CREATE_DATA_IMAGE */
 message DataImageResp {
-	int32 dataImageId = 1;
+	string dataImageId = 1;
 }
 
 /* REQUEST_SEGMENTATION */

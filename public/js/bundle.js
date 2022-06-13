@@ -8944,7 +8944,7 @@ if(document.querySelector('.accueil')){
 ///////////////////////////////////////////////////////////////
 //Lancement du serveur Websocket
 // const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
-const ws = new WebSocket("ws://127.0.0.1:8081");
+
 
 
 ////////////////////////////////////////////////////////
@@ -9071,180 +9071,200 @@ function afficheZoomImg(){
 run().catch(err => console.log(err));
 
 async function run() {
-function snd(msg){
-    connection.sendBytes(Req.encode(Req.create(msg)).finish());
-}
-const root = await protobuf.load("../protobuf/Messages.proto");
-const Req = root.lookupType("FoDoMustProto.RequestMessage");
-const Resp = root.lookupType("FoDoMustProto.ResponseMessage");
-//Récupère le user id
-ws.addEventListener("open", () => {
-    console.log(1);
-    ws.snd({header:14});
-});
-var second = false;
-var result2 = [];
-//Récupère le data lorsqu'il reçoit un message
 
-ws.addEventListener('message', function(event) {
-    console.log(1);
-    message = Resp.decode(event.binaryData);
-    console.log(message);
-    //"Chargement d'image" -> "Génération de donnée" -> "Lancer une classification simple utilisant KMeans"
-    switch (message.header){
-                case 42:
-                    uid = message.responseClientBody.clientID;
-                    ws.snd({
-                        imageOpenRequest:{
-                            base64File: file,
-                            checksum: "0333ff8c224366dac05ba154f2c6e4d9",
-                            isLaunchOrthoRect: false,
-                            fileName: "070992.tif",
-                            overWrite: true
+    const ws = new WebSocket("ws://127.0.0.1:8081");
+
+    const root = await protobuf.load("protobuf/Messages.proto");
+    const Req = root.lookupType("FoDoMustProto.RequestMessage");
+    const Resp = root.lookupType("FoDoMustProto.ResponseMessage");
+
+    var connection;
+        
+    function snd(msg){
+        connection.sendBytes(Req.encode(Req.create(msg)).finish());
+    }
+
+    function emineEncoder(msg) {
+        return Req.encode(Req.create(msg)).finish();
+    }
+
+    //Récupère le user id
+    ws.addEventListener("open", () => {
+        console.log(1);
+        //connection = ws;
+        msg = {header:14};
+        // ws.send({header:14});
+        ws.sendBytes(Req.encode(Req.create(msg)).finish())
+    });
+
+
+    var second = false;
+    var result2 = [];
+    //Récupère le data lorsqu'il reçoit un message
+
+    ws.addEventListener('message', function(event) {
+        console.log(1);
+        message = Resp.decode(event.binaryData);
+        console.log(message);
+        //"Chargement d'image" -> "Génération de donnée" -> "Lancer une classification simple utilisant KMeans"
+        switch (message.header){
+            case 42:
+                uid = message.responseClientBody.clientID;
+                msg = {
+                    imageOpenRequest:{
+                        base64File: file,
+                        checksum: "0333ff8c224366dac05ba154f2c6e4d9",
+                        isLaunchOrthoRect: false,
+                        fileName: "070992.tif",
+                        overWrite: true
+                    },
+                    clientId: uid,
+                    header: 20
+                };
+
+                sendBytes(emineEncoder(msg)); break;
+            case 16:
+                result = message.imageOpenResp.idData;
+                msg = {
+                    imageInterfaceRequest:{
+                        idMessage: result
+                    },
+                    clientId: uid,
+                    header: 21
+                }
+
+                sendBytes(emineEncoder(msg)); break;
+            case 17:
+                result2.push(message.imageInterfaceResp.imageInterf);
+                snd({
+                    bufferedImageRequest:{
+                        idMessage: result,
+                        doRescale: false
+                    },
+                    clientId: uid,
+                    header: 22
+                }); break;
+            // create data image
+            case 18:
+                getImg.base64File = message.bufferedImageResp.base64File;
+                fs.writeFileSync(__dirname+"/demo.tif", getImg.base64File);
+                //afficheZoomImg();
+                if (!second)
+                snd({
+                        dataImageRequest:{
+                            images: result2,
+                            mask: [
+                                {path:"."}
+                            ],
+                            samplingMethod: 1,
+                            paramSamplingMethode: 4.0,
+                            idPercentage: 5,
+                            nameData: ""
                         },
                         clientId: uid,
-                        header: 20
-                    }); break;
-                case 16:
-                    result = message.imageOpenResp.idData;
-                    ws.send({
-                        imageInterfaceRequest:{
-                            idMessage: result
+                        header: 23
+                    });
+                else
+                    /*MONO_STRATEGY_APPROACH 			= 1;
+                    MULTI_STRATEGY_APPROACH 		= 2;
+                    MULTI_STRATEGY_ETC_APPROACH 	= 3;
+                    MACLAW_APPROACH 				= 4;
+                    VOTING_APPROACH 				= 5;
+                    MULTIRESOLUTION_APPROACH 		= 6;
+                    IMPORT_APPROACH 				= 7; */
+                    snd({
+                        rootClassificationRequest:{
+                            idClassif: 1
                         },
                         clientId: uid,
-                        header: 21
-                    }); break;
-                case 17:
-                    result2.push(message.imageInterfaceResp.imageInterf);
-                    ws.send({
-                        bufferedImageRequest:{
-                            idMessage: result,
-                            doRescale: false
-                        },
-                        clientId: uid,
-                        header: 22
-                    }); break;
-                // create data image
-                case 18:
-                    getImg.base64File = message.bufferedImageResp.base64File;
-                    fs.writeFileSync(__dirname+"/demo.tif", getImg.base64File);
-                    //afficheZoomImg();
-                    if (!second)
-                    ws.send({
-                            dataImageRequest:{
-                                images: result2,
-                                mask: [
-                                    {path:"."}
-                                ],
-                                samplingMethod: 1,
-                                paramSamplingMethode: 4.0,
-                                idPercentage: 5,
-                                nameData: ""
-                            },
-                            clientId: uid,
-                            header: 23
-                        });
-                    else
-                        /*MONO_STRATEGY_APPROACH 			= 1;
-                        MULTI_STRATEGY_APPROACH 		= 2;
-                        MULTI_STRATEGY_ETC_APPROACH 	= 3;
-                        MACLAW_APPROACH 				= 4;
-                        VOTING_APPROACH 				= 5;
-                        MULTIRESOLUTION_APPROACH 		= 6;
-                        IMPORT_APPROACH 				= 7; */
-                        ws.send({
-                            rootClassificationRequest:{
-                                idClassif: 1
-                            },
-                            clientId: uid,
-                            header: 18
-                        });
-                    break;
-                case 19:
-                    ws.send({
-                        dataInterfaceRequest:{
-                            id: message.dataImageResp.dataImageId
-                        },
-                        clientId: uid,
-                        header: 1
-                    });break;
-                // create classification
-                case 3:
-                    //mcb.IDData;
-                    //mcb.b64DataInterface;
-                    //mcb.dataInterface;
-                    ws.send({
-                        classificationRequest:{
-                            idData: message.dataInterfaceResp.IDData,
-                            classification: {
-                                isHybrid: false,
-                                isMaclaw: false,
-                                idData: event.dataInterfaceResp.IDData,
-                                choiceApproch: 1,
-                                distanceUse: 1,
-                                type: "utils.ParamClassifSimple",
-                                selectedMethod: "0",
-                                paramClustering: [
-                                    10.0,
-                                    10.0
-                                ],
-                                weightsParam: [
-                                    1.0,
-                                    1.0,
-                                    1.0
-                                ],
-                                hClustering: false
-                            }
-                        },
-                        clientId: uid,
-                        header: 2
-                    });break;
-                case 6:
-                    //mcb.code;
-                    currentClassifID = message.classificationResp.code;
-                    ws.send({
+                        header: 18
+                    });
+                break;
+            case 19:
+                snd({
+                    dataInterfaceRequest:{
+                        id: message.dataImageResp.dataImageId
+                    },
+                    clientId: uid,
+                    header: 1
+                });break;
+            // create classification
+            case 3:
+                //mcb.IDData;
+                //mcb.b64DataInterface;
+                //mcb.dataInterface;
+                snd({
+                    classificationRequest:{
+                        idData: message.dataInterfaceResp.IDData,
+                        classification: {
+                            isHybrid: false,
+                            isMaclaw: false,
+                            idData: event.dataInterfaceResp.IDData,
+                            choiceApproch: 1,
+                            distanceUse: 1,
+                            type: "utils.ParamClassifSimple",
+                            selectedMethod: "0",
+                            paramClustering: [
+                                10.0,
+                                10.0
+                            ],
+                            weightsParam: [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            hClustering: false
+                        }
+                    },
+                    clientId: uid,
+                    header: 2
+                });break;
+            case 6:
+                //mcb.code;
+                currentClassifID = message.classificationResp.code;
+                snd({
+                    finishRequest:{
+                        idClassif: String(message.classificationResp.code)
+                    },
+                    clientId: uid,
+                    header: 15
+                });break;
+            case 12:
+                //mcb.finish
+                if (message.finishResp.finish!='100') {
+                    snd({
                         finishRequest:{
-                            idClassif: String(message.classificationResp.code)
+                            idClassif: String(currentClassifID)
                         },
                         clientId: uid,
                         header: 15
                     });break;
-                case 12:
-                    //mcb.finish
-                    if (message.finishResp.finish!='100') {
-                        ws.send({
-                            finishRequest:{
-                                idClassif: String(currentClassifID)
-                            },
-                            clientId: uid,
-                            header: 15
-                        });break;
-                    }
-                    ws.send({
-                        resultClassificationRequest:{
-                            idClassif: String(currentClassifID)
-                        },
-                        clientId: uid,
-                        header: 9
-                    });break;
-                case 7:
-                    //mcb.resultClassification
-                    second = true;
-                    result2.push(message.resultClassificationResp.imageInterf);
-                    ws.send({
-                        bufferedImageRequest:{
-                            idMessage: result,
-                            doRescale: false
-                        },
-                        clientId: uid,
-                        header: 22
-                    });
-                    break;
-                //case 15:console.log( Date.now() - start);break;
-                default: break;
-    }
-});
-};
+                }
+                snd({
+                    resultClassificationRequest:{
+                        idClassif: String(currentClassifID)
+                    },
+                    clientId: uid,
+                    header: 9
+                });break;
+            case 7:
+                //mcb.resultClassification
+                second = true;
+                result2.push(message.resultClassificationResp.imageInterf);
+                snd({
+                    bufferedImageRequest:{
+                        idMessage: result,
+                        doRescale: false
+                    },
+                    clientId: uid,
+                    header: 22
+                });
+                break;
+            //case 15:console.log( Date.now() - start);break;
+            default: break;
+        }
+    });
+}
 
 ///carte de différence
 const differenceCard = document.querySelector('.difference');
@@ -9369,7 +9389,6 @@ if(statsResults){
         statsResults.innerHTML = "<%- include('./results/centroids'); %>";
     })
 }
-
 
 //////////////////////////////////////////////////////
 ///////Affichage tableau après classification////////

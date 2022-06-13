@@ -74,4 +74,6 @@ message ResponseMessage {
   GetHistoricResp getHistoricResp = 28;
 }
 
-
+message InfoMessage {
+	string item = 1;
+}
