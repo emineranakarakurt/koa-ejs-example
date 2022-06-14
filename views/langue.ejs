@@ -1,11 +1,22 @@
-<div class="container">
-    <div class="accueil accueil-langue d-flex justify-center align-center">
-        <div class="accueil-langue__selection">
-            <h3>Langue</h3>
-            <ul>
-                <li class="selected"><a href="/connexion"> <img src="./images/drapeaufr.png" alt=""> Français</a></li>
-                <li><a href="/connexion"><img src="./images/drapeauang.png" alt=""> Anglais</a> </li>
-            </ul>
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('./partials/head'); %>
+    </head>
+<body>
+    <main>
+        <div class="container">
+            <div class="accueil accueil-langue d-flex justify-center align-center">
+                <div class="accueil-langue__selection">
+                    <h3>Langue</h3>
+                    <ul>
+                        <li class="selected"><a href="/connexion"> <img src="./images/drapeaufr.png" alt=""> Français</a></li>
+                        <li><a href="/connexion"><img src="./images/drapeauang.png" alt=""> Anglais</a> </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </main>
+</body>
+<%- include('./partials/scripts.ejs'); %>
+</html>

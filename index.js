@@ -50,7 +50,6 @@ app.use(errorHandler);
 
 render(app, {
   root: path.join(__dirname, "views"),
-  layout: 'layout',
   viewExt: "ejs",
   cache: false,
   debug: true

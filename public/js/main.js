@@ -3,11 +3,11 @@ import {base64String} from './base64.js';
 // import {result} from './result.js';
 //var result = require('result');
 ////////////////////////////////////////////////////////////////
-if(document.querySelector('.accueil')){
-    document.querySelector('aside').style.display = "none";
-    document.querySelector('nav').style.display = "none";
-    document.querySelector('.container').style.minHeight = "100vh"
-}
+// if(document.querySelector('.accueil')){
+//     document.querySelector('aside').style.display = "none";
+//     document.querySelector('nav').style.display = "none";
+//     document.querySelector('.container').style.minHeight = "100vh"
+// }
 ///////////////////////////////////////////////////////////////
 //Lancement du serveur Websocket
 // const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
@@ -32,6 +32,9 @@ var initializeBtn = document.querySelectorAll(".initialize");
 const menuBurger = document.querySelector('nav i.fa-bars');
 const aside = document.querySelector('aside');
 const containerInterface = document.querySelector('.container-interface');
+const listAgglo = document.querySelectorAll('.agglomerat');
+const triangles = document.querySelectorAll('.triangle');
+const childAgglo = document.querySelectorAll('.agglomerat ul');
 /////////////////////////////////////////////////////////////
 ////////Affichage optionnel de l'aside
 menuBurger.addEventListener('click', function(){
@@ -39,7 +42,16 @@ menuBurger.addEventListener('click', function(){
     aside.classList.toggle('diplay-block');
     containerInterface.classList.toggle('w-85');
 });
-
+//////Clusters
+for(let i = 0; i < listAgglo.length; i++){
+    listAgglo[i].addEventListener('click', function(){
+        triangles[i].classList.toggle('triangle-rotate');
+        console.log(childAgglo[i].children);
+        for(let j = 0; j < childAgglo[i].children.length; j++){
+            childAgglo[i].children[j].classList.toggle('display-block');
+        }
+    })
+}
 
 /////////////////////////////////////////////////////////////
 var divImage = document.querySelectorAll('.divImage');

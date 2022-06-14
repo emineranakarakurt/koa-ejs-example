@@ -4,17 +4,37 @@
         <div class="help-bubble">?</div>
     </div>
     <div class="layout">
-        <img src="./images/layout.svg" alt="">
+        <ul>
+            <li class="agglomerat"><img src="./images/triangle-bleu.svg" class="triangle" alt="triangle"
+                    title="Voir plus"><span>Agglomérat 1</span>
+                <ul>
+                    <li class="cluster">Cluster 1</li>
+                    <li class="cluster">Cluster 2</li>
+                </ul>
+            </li>
+            <li class="agglomerat"><img src="./images/triangle-bleu.svg" class="triangle" alt="triangle"
+                    title="Voir plus"><span>Agglomérat 2</span>
+                <ul>
+                    <li class="cluster">Cluster 3</li>
+                </ul>
+            </li>
+            <li class="agglomerat"><img src="./images/triangle-bleu.svg" class="triangle" alt="triangle"
+                    title="Voir plus"><span>Agglomérat 3</span>
+                <ul>
+                    <li class="cluster">Cluster 4</li>
+                </ul>
+            </li>
+        </ul>
     </div>
     <div class="right-side__operations">
         <div>
             <h4>Opérations sur le cluster :</h4>
             <span>
-                <button class="btn-sm btn-second"><i class="fa-solid fa-paintbrush"></i></button>
-                <button class="btn-sm btn-second"><i class="fa-solid fa-burst"></i></button>
-                <button class="btn-sm btn-second"><i class="fa-solid fa-burst"></i></button>
-                <button class="btn-sm btn-second"><i class="fa-solid fa-broom"></i></button>
-                <button class="btn-sm btn-second"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+                <button class="btn-sm btn-second" title="Colorier"><i class="fa-solid fa-paintbrush"></i></button>
+                <button class="btn-sm btn-second" title="Diviser"><i class="fa-solid fa-burst"></i></button>
+                <button class="btn-sm btn-second" title="Fusionner"><i class="fa-solid fa-burst"></i></button>
+                <button class="btn-sm btn-second" title="Retirer"><i class="fa-solid fa-broom"></i></button>
+                <button class="btn-sm btn-second" title="Nouvelle itération"><i class="fa-solid fa-arrow-rotate-left"></i></button>
             </span>
         </div>
         <div>
@@ -26,7 +46,8 @@
                 </div>
                 <div>
                     <label for="max">Expand to level : </label>
-                    <button type="submit" id="max" class="btn-sm btn-primary"><i class="fa-solid fa-arrow-right-long"></i></button>
+                    <button type="submit" id="max" class="btn-sm btn-primary"><i
+                            class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
             </div>
         </div>
