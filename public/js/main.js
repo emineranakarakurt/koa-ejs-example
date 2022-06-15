@@ -1,6 +1,6 @@
-//import {tab} from './matrice.js';
+import {tab} from './matrice.js';
 import {base64String} from './base64.js';
-// import {result} from './result.js';
+import {result} from './result.js';
 //var result = require('result');
 ////////////////////////////////////////////////////////////////
 // if(document.querySelector('.accueil')){
@@ -20,6 +20,7 @@ var parsed;
 var file;
 var statusReq;
 var message;
+var colorTabInput = [];
 var zoomBtn = document.querySelectorAll(".zoom");
 var dezoomBtn = document.querySelectorAll(".dezoom");
 var imageCarte = document.querySelectorAll(".carte");
@@ -32,26 +33,13 @@ var initializeBtn = document.querySelectorAll(".initialize");
 const menuBurger = document.querySelector('nav i.fa-bars');
 const aside = document.querySelector('aside');
 const containerInterface = document.querySelector('.container-interface');
-const listAgglo = document.querySelectorAll('.agglomerat');
+const racine = document.querySelectorAll('.racine');
 const triangles = document.querySelectorAll('.triangle');
-const childAgglo = document.querySelectorAll('.agglomerat ul');
+const childRacine = document.querySelectorAll('.racine ul');
+const spanRacine = document.querySelectorAll('.racine span');
+const cluster = document.querySelectorAll('.cluster');
 /////////////////////////////////////////////////////////////
-////////Affichage optionnel de l'aside
-menuBurger.addEventListener('click', function(){
-    aside.classList.toggle('display-none');
-    aside.classList.toggle('diplay-block');
-    containerInterface.classList.toggle('w-85');
-});
-//////Clusters
-for(let i = 0; i < listAgglo.length; i++){
-    listAgglo[i].addEventListener('click', function(){
-        triangles[i].classList.toggle('triangle-rotate');
-        console.log(childAgglo[i].children);
-        for(let j = 0; j < childAgglo[i].children.length; j++){
-            childAgglo[i].children[j].classList.toggle('display-block');
-        }
-    })
-}
+
 
 /////////////////////////////////////////////////////////////
 var divImage = document.querySelectorAll('.divImage');
@@ -692,18 +680,18 @@ if(dataTable){
     }
 }
 
-//page results
-const projectionPanel = document.querySelector('.projection-panel');
-const centroids = document.querySelector('.centroids');
-const statsResults = document.querySelector('.stats-results');
-if(statsResults){
-    projectionPanel.addEventListener('click', function() {
-        statsResults.innerHTML = "<%- include('./results/projectionpanel'); %>";
-    })
-    centroids.addEventListener('click', function () {
-        statsResults.innerHTML = "<%- include('./results/centroids'); %>";
-    })
-}
+// //page results
+// const projectionPanel = document.querySelector('.projection-panel');
+// const centroids = document.querySelector('.centroids');
+// const statsResults = document.querySelector('.stats-results');
+// if(statsResults){
+//     projectionPanel.addEventListener('click', function() {
+//         statsResults.innerHTML = "<%- include('./results/projectionpanel'); %>";
+//     })
+//     centroids.addEventListener('click', function () {
+//         statsResults.innerHTML = "<%- include('./results/centroids'); %>";
+//     })
+// }
 
 
 
@@ -711,106 +699,180 @@ if(statsResults){
 ///////Affichage tableau après classification////////
 ////////////////////////////////////////////////////
 
-// var newTab = [];
-// var height = 218;
-// var width = 255;
+var newTab = [];
+var height = 218;
+var width = 255;
 
-// function toColor(num) {
-//     num >>>= 0;
-//     var b = num & 0xFF,
-//         g = (num & 0xFF00) >>> 8,
-//         r = (num & 0xFF0000) >>> 16,
-//         a = ((num & 0xFF000000) >>> 24) / 255;
-//     return "rgba(" + [r, g, b, a].join(",") + ")";
-// }
-// function hexify(color) {
-//     var values = color
-//       .replace(/rgba?\(/, '')
-//       .replace(/\)/, '')
-//       .replace(/[\s+]/g, '')
-//       .split(',');
-//     var a = parseFloat(values[3] || 1),
-//         r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
-//         g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
-//         b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
-//     return "#" +
-//       ("0" + r.toString(16)).slice(-2) +
-//       ("0" + g.toString(16)).slice(-2) +
-//       ("0" + b.toString(16)).slice(-2);
-//   }
-// var colorscaleValue = [];
-// for (let i = 0; i < 10; i++) {
-//     let tab = [];
-//     let number = '0.' + i;
-//     tab.push(parseFloat(number));
-//     console.log(result._clusterColor);
-//     tab.push(toColor(result._clusterColor[i].value));
-//     colorscaleValue.push(tab);
-// }
-// colorscaleValue.push([1,
-//     toColor(result._clusterColor[9].value)
-// ]);
-// var colorTabInput = [];
-// for(let i = 0; i < colorscaleValue.length; i++){
-//     colorTabInput.push(hexify(colorscaleValue[i][1]));
-// }
-// console.log(colorscaleValue);
-// for (let i = height; i > 0; i--) {
-//     let tabTab = [];
-//     for (let j = width; j > 0; j--) {
-//         tabTab.push(result.clusterMap[i * height + j]);
-//     }
-//     newTab.push(tabTab);
-// }
-// console.log(newTab);
-// var data = [{
-//     z: newTab,
-//     type: 'heatmap',
-//     colorscale: colorscaleValue,
-// }];
-// if(document.querySelector('#myDiv')){
-//     Plotly.newPlot('myDiv', data);
-// }
+function toColor(num) {
+    num >>>= 0;
+    var b = num & 0xFF,
+        g = (num & 0xFF00) >>> 8,
+        r = (num & 0xFF0000) >>> 16,
+        a = ((num & 0xFF000000) >>> 24) / 255;
+    return "rgba(" + [r, g, b, a].join(",") + ")";
+}
+function hexify(color) {
+    var values = color
+      .replace(/rgba?\(/, '')
+      .replace(/\)/, '')
+      .replace(/[\s+]/g, '')
+      .split(',');
+    var a = parseFloat(values[3] || 1),
+        r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
+        g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
+        b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
+    return "#" +
+      ("0" + r.toString(16)).slice(-2) +
+      ("0" + g.toString(16)).slice(-2) +
+      ("0" + b.toString(16)).slice(-2);
+  }
+var colorscaleValue = [];
+for (let i = 0; i < 10; i++) {
+    let tab = [];
+    let number = '0.' + i;
+    tab.push(parseFloat(number));
+    console.log(result._clusterColor);
+    tab.push(toColor(result._clusterColor[i].value));
+    colorscaleValue.push(tab);
+}
+colorscaleValue.push([1,
+    toColor(result._clusterColor[9].value)
+]);
 
-// const tableCluster = document.querySelector('.right-side__infos div');
-// if(tableCluster){
-//     let table = document.createElement('table');
-//     tableCluster.appendChild(table);
-//     for(let i = 0; i < 3; i++){
-//         let tr = document.createElement('tr');
-//         table.appendChild(tr);
-//         let th = document.createElement('th');
+for(let i = 0; i < colorscaleValue.length; i++){
+    colorTabInput.push(hexify(colorscaleValue[i][1]));
+}
+console.log(colorscaleValue);
+for (let i = height; i > 0; i--) {
+    let tabTab = [];
+    for (let j = width; j > 0; j--) {
+        tabTab.push(result.clusterMap[i * height + j]);
+    }
+    newTab.push(tabTab);
+}
+console.log(newTab);
+var data = [{
+    z: newTab,
+    type: 'heatmap',
+    colorscale: colorscaleValue,
+}];
+if(document.querySelector('#myDiv')){
+    Plotly.newPlot('myDiv', data);
+}
+
+const tableCluster = document.querySelector('.divTable');
+if(tableCluster){
+    let table = document.createElement('table');
+    tableCluster.appendChild(table);
+    // for(let i = 0; i < 3; i++){
+    //     let tr = document.createElement('tr');
+    //     table.appendChild(tr);
+    //     let th = document.createElement('th');
         
-//         switch(i){
-//             case 0:
-//                 th.textContent = "Name";
-//                 break;
-//             case 1:
-//                 th.textContent = "Color";
-//                 break;
-//             case 2: 
-//                 th.textContent = "Cardinality";
-//                 break;
-//         }
-//         tr.appendChild(th);
-//         for(let j = 0; j < colorscaleValue.length - 1; j++){
-//             let td = document.createElement('td');
-//             switch(i){
-//                 case 0:
-//                     td.textContent = "Cluster " + (j + 1); 
-//                     break;
-//                 case 1:
-//                     let inputColor = document.createElement('input');
-//                     inputColor.type = "color";
-//                     inputColor.value = colorTabInput[j];
-//                     console.log(colorTabInput);
-//                     td.appendChild(inputColor);
-//                     break;
-//                 case 2: 
-//                     td.textContent = result._cardinalityCluster[j];
-//                     break;
-//             }
-//             tr.appendChild(td);
-//         }
-//     }
-// }
+    //     switch(i){
+    //         case 0:
+    //             th.textContent = "Name";
+    //             break;
+    //         case 1:
+    //             th.textContent = "Color";
+    //             break;
+    //         case 2: 
+    //             th.textContent = "Cardinality";
+    //             break;
+    //     }
+    //     tr.appendChild(th);
+    //     for(let j = 0; j < colorscaleValue.length - 1; j++){
+    //         let td = document.createElement('td');
+    //         switch(i){
+    //             case 0:
+    //                 td.textContent = "Cluster " + (j + 1); 
+    //                 break;
+    //             case 1:
+    //                 let inputColor = document.createElement('input');
+    //                 inputColor.type = "color";
+    //                 inputColor.value = colorTabInput[j];
+    //                 td.appendChild(inputColor);
+    //                 break;
+    //             case 2: 
+    //                 td.textContent = result._cardinalityCluster[j];
+    //                 break;
+    //         }
+    //         tr.appendChild(td);
+    //     }
+    // }
+    for(let i = 0; i < (result._numberCluster + 1); i++){
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
+        for(let j = 1; j <= 3; j++){
+            let th = document.createElement('th');
+            if(i == 0){
+                switch(j){
+                    case 1:
+                        th.textContent = "Nom";
+                        break;
+                    case 2:
+                        th.textContent = "Couleur";
+                        break;
+                    case 3: 
+                        th.textContent = "Cardinalité";
+                        break;
+                }
+                tr.appendChild(th);
+            }else{
+                let td = document.createElement('td');
+                switch(j){
+                    case 1:
+                        td.textContent = "Cluster " + i; 
+                        break;
+                    case 2:
+                        let inputColor = document.createElement('input');
+                        inputColor.type = "color";
+                        inputColor.value = colorTabInput[i];
+                        td.appendChild(inputColor);
+                        break;
+                    case 3: 
+                        td.textContent = result._cardinalityCluster[i - 1];
+                        break;
+                }
+                tr.appendChild(td);
+            }
+            
+        }
+    }
+}
+////////Affichage optionnel de l'aside
+menuBurger.addEventListener('click', function(){
+    aside.classList.toggle('display-none');
+    aside.classList.toggle('diplay-block');
+    containerInterface.classList.toggle('w-85');
+});
+//////Clusters
+for(let i = 0; i < racine.length; i++){
+
+    for(let k = 0; k < result._numberCluster;k++){
+        let newLi = document.createElement('li');
+        newLi.className = "cluster";
+        childRacine[i].appendChild(newLi);
+        let liSpan = document.createElement('span');
+        liSpan.innerText = "Cluster " + parseInt(k+1);
+        liSpan.className = "cluster-span";
+        newLi.appendChild(liSpan);
+        //
+        let canvas = document.createElement('canvas');
+        canvas.width = 20;
+        canvas.height = 20;
+        
+        let ctx = canvas.getContext('2d');
+        console.log(colorTabInput[k]);
+        ctx.fillStyle =  colorTabInput[k];
+        ctx.fillRect(0, 0, 20, 20);
+        newLi.insertBefore(canvas, liSpan);
+    }
+    
+    racine[i].addEventListener('click', function(){
+        triangles[i].classList.toggle('triangle-rotate');
+        for(let j = 0; j < childRacine[i].children.length; j++){
+            childRacine[i].children[j].classList.toggle('display-block');
+        }
+    })
+}

@@ -516,11 +516,22 @@
 }
 
 .container-interface .results-col__left .button-menu {
-  width: 60%;
-  min-width: 150px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  max-height: 100px;
+  border-top: #030233 2px solid;
+  padding-bottom: .5vh;
+  background-color: #ffffff;
+}
+
+.container-interface .results-col__left .button-menu a {
+  color: #030233;
+  padding: .5vh .3vw;
+  border-radius: 0px 0px 11px 11px;
+}
+
+.container-interface .results-col__left .button-menu a.active {
+  background-color: #030233;
+  color: #ffffff;
 }
 
 .container-interface .results-col__right {
@@ -544,7 +555,7 @@
   padding: 5px;
   border-radius: 11px;
   margin-bottom: 10px;
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -557,7 +568,7 @@
   line-height: 32px;
 }
 
-.container-interface .results-col__right .right-side__clusters .layout ul .agglomerat:hover {
+.container-interface .results-col__right .right-side__clusters .layout ul .racine ul li:hover {
   background-color: #2D75EE;
   color: #ffffff;
 }
@@ -572,16 +583,23 @@
           transform: rotate(-90deg);
 }
 
-.container-interface .results-col__right .right-side__operations {
-  background-color: #B3C7EF;
+.container-interface .results-col__right .right-side__clusters .hierarchy {
+  background-color: #ffffff;
   color: #030233;
-  padding: 15px;
+  padding: 5px;
   border-radius: 11px;
 }
 
-.container-interface .results-col__right .right-side__operations button {
-  border: none;
-  padding: .5vh 1vw;
+.container-interface .results-col__right .right-side__clusters .hierarchy h4 {
+  margin-bottom: 10px;
+}
+
+.container-interface .results-col__right .right-side__clusters .hierarchy input, .container-interface .results-col__right .right-side__clusters .hierarchy button {
+  width: 5vw;
+}
+
+.container-interface .results-col__right .right-side__clusters .hierarchy button {
+  padding: 0;
 }
 
 .container-interface .results-col__right .right-side__infos {
@@ -592,20 +610,41 @@
   margin-top: 15px;
 }
 
-.container-interface .results-col__right .right-side__infos div {
-  background-color: #ffffff;
-  overflow-x: scroll;
+.container-interface .results-col__right .right-side__infos h4 {
+  color: #ffffff;
+  margin-bottom: .5vh;
 }
 
-.container-interface .results-col__right .right-side__infos div td, .container-interface .results-col__right .right-side__infos div th {
+.container-interface .results-col__right .right-side__infos button {
+  border: none;
+  margin-top: .3vh;
+  padding: .5vh 1.5vw;
+}
+
+.container-interface .results-col__right .right-side__infos .divTable {
+  background-color: #ffffff;
+  overflow-y: auto;
+  max-height: 250px;
+  padding: .5vh .5vw;
+  border-radius: 5px;
+  margin: 1vh;
+}
+
+.container-interface .results-col__right .right-side__infos .divTable td, .container-interface .results-col__right .right-side__infos .divTable th {
   border: 1px solid #030233;
   border-collapse: collapse;
   padding: 2px;
   text-align: center;
 }
 
-.container-interface .results-col__right .right-side__infos div table {
+.container-interface .results-col__right .right-side__infos .divTable table {
   border-collapse: collapse;
+  width: 100%;
+}
+
+.container-interface .results-col__right .right-side__infos .divTable table th {
+  color: #ffffff;
+  background-color: #030233;
 }
 
 body header nav {
