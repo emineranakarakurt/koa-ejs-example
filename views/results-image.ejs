@@ -29,13 +29,15 @@
                 <div class="d-flex align-start space-between">
                     <div class="view-mode">
                         <h3>View mode</h3>
-                        <div>
-                            <input type="radio" name="viewmode" id="normal">
-                            <label for="normal">Normal Mode</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="viewmode" id="multi">
-                            <label for="multi">Multi Mode</label>
+                        <div class="d-flex ">
+                            <div>
+                                <input type="radio" name="viewmode" id="normal">
+                                <label for="normal">Normal Mode</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="viewmode" id="multi">
+                                <label for="multi">Multi Mode</label>
+                            </div>
                         </div>
                     </div>
                     <div class="button-menu d-flex align-center">
@@ -57,7 +59,12 @@
         </div>
     </div>
     <div class="infobar d-flex space-around align-center">
-        <span>Sauvegarde auto</span>
+        <span>Sauvegarde auto 
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+        </span>
         <span class="projet-name">Projet : XXX</span>
         <span>Date début projet : XXX</span>
     </div>
