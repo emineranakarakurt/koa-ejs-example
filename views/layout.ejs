@@ -2,6 +2,7 @@
 <html>
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>koa ejs</title>
         <link rel="stylesheet" href="./style/style.css">
         <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
@@ -11,7 +12,12 @@
     <body>
         <header>
             <nav class="d-flex align-center space-around">
-                <i class="fa-solid fa-bars"></i>
+                <input type="checkbox" id="menu_checkbox">
+                <label for="menu_checkbox">
+                <div></div>
+                <div></div>
+                <div></div>
+                </label>
                 <div class="nav-logo">
                     <img src="./images/F.png" alt="Logo">
                 </div>
@@ -107,7 +113,8 @@
         <script src="//cdn.rawgit.com/dcodeIO/protobuf.js/6.X.X/dist/protobuf.js"></script>
         <script src='https://cdn.plot.ly/plotly-2.12.1.min.js'></script>
         <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
-        <script src="./js/main.js" type="module" async defer></script>
+        <script src="./js/classification-result.js" type="module"></script>
+        <script src="./js/main.js" type="module"></script>
     </body>
 
 </html>

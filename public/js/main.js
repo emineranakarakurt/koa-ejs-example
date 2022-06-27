@@ -1,13 +1,16 @@
-import {tab} from './matrice.js';
 import {base64String} from './base64.js';
 import {result} from './result.js';
-//var result = require('result');
+import { newTab, colorTabInput } from './classification-result.js';
 ////////////////////////////////////////////////////////////////
+///Permet de cacher la navbar et le aside sur les pages  : langue, connexion
+//Mais cette solution n'est pas à garder
 // if(document.querySelector('.accueil')){
 //     document.querySelector('aside').style.display = "none";
 //     document.querySelector('nav').style.display = "none";
 //     document.querySelector('.container').style.minHeight = "100vh"
 // }
+
+
 ///////////////////////////////////////////////////////////////
 //Lancement du serveur Websocket
 // const ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
@@ -15,12 +18,14 @@ import {result} from './result.js';
 
 
 ////////////////////////////////////////////////////////
-
+//Concernent les requetes
 var parsed;
 var file;
 var statusReq;
 var message;
-var colorTabInput = [];
+
+
+//Concerne la barre d'outils
 var zoomBtn = document.querySelectorAll(".zoom");
 var dezoomBtn = document.querySelectorAll(".dezoom");
 var imageCarte = document.querySelectorAll(".carte");
@@ -30,9 +35,13 @@ var brightnessMoinsBtn = document.querySelectorAll(".brightnessMoins");
 var contrastPlusBtn = document.querySelectorAll(".contrastPlus");
 var contrastMoinsBtn = document.querySelectorAll(".contrastMoins");
 var initializeBtn = document.querySelectorAll(".initialize");
-const menuBurger = document.querySelector('nav i.fa-bars');
+
+//Concerne le aside
+const menuBurger = document.querySelector('#menu_checkbox');
 const aside = document.querySelector('aside');
 const containerInterface = document.querySelector('.container-interface');
+
+//Concerne dans page results : les clusters
 const racine = document.querySelectorAll('.racine');
 const triangles = document.querySelectorAll('.triangle');
 const childRacine = document.querySelectorAll('.racine ul');
@@ -42,11 +51,12 @@ const cluster = document.querySelectorAll('.cluster');
 
 
 /////////////////////////////////////////////////////////////
+//Fonction envoyée avec la dernière requete
 var divImage = document.querySelectorAll('.divImage');
 //Affiche et zoom, dézoom sur l'image
 function afficheZoomImg(){
-    //Création de l'image
     
+    //Création de l'image
     var imageSmall = document.createElement('img');
     var imageSrc = 'data:image/png;base64,' + base64String;
     birdView.appendChild(imageSmall);
@@ -57,9 +67,7 @@ function afficheZoomImg(){
         image.src = imageSrc;
         divImage[i].appendChild(image);
 
-        /////////////////////////////////////
         //Fonctionnalité de zoom dans l'image
-        ////////////////////////////////////
         var zoomScale = 1;
         var brightness = 100;
         var contrast = 100;
@@ -142,9 +150,7 @@ function afficheZoomImg(){
     }
 }
 
-
-
-
+//Concerne le protobuf
 var ws, Req, Resp;
 
 
@@ -164,7 +170,7 @@ const root = protobuf.load("protobuf/Messages.proto").catch((err)=>{
     var start = Date.now();
     var msg;
     console.log("After load");
-    ws = new WebSocket("ws://127.0.0.1:8081");
+    ws = new WebSocket("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
     ws.binaryType = "arraybuffer";
 
     ws.addEventListener("open", () => {
@@ -569,7 +575,7 @@ async function run() {
     });
 }
 
-///carte de différence
+//Concerne la carte de différence
 const differenceCard = document.querySelector('.difference');
 
 if(differenceCard){
@@ -578,7 +584,7 @@ if(differenceCard){
     differenceCard.appendChild(imgDiff);
 }
 
-//Modal window open : genrate data
+//Modal window open : generate data
 const openModalBtn = document.getElementsByClassName('btn-modal');
 const modalWindow = document.querySelectorAll('.modal-window');
 const btnClose = document.querySelectorAll('.btn-close');
@@ -624,6 +630,8 @@ if(modalWindow){
         })
     }
 }
+
+//Concerne les boutons valider et annuler rouges et verts
 if(btnAnimClose){
     btnAnimClose.addEventListener('click', function(){
         modalWindow.style.display = "none"
@@ -693,72 +701,8 @@ if(dataTable){
 //     })
 // }
 
-
-
-//////////////////////////////////////////////////////
-///////Affichage tableau après classification////////
-////////////////////////////////////////////////////
-
-var newTab = [];
-var height = 218;
-var width = 255;
-
-function toColor(num) {
-    num >>>= 0;
-    var b = num & 0xFF,
-        g = (num & 0xFF00) >>> 8,
-        r = (num & 0xFF0000) >>> 16,
-        a = ((num & 0xFF000000) >>> 24) / 255;
-    return "rgba(" + [r, g, b, a].join(",") + ")";
-}
-function hexify(color) {
-    var values = color
-      .replace(/rgba?\(/, '')
-      .replace(/\)/, '')
-      .replace(/[\s+]/g, '')
-      .split(',');
-    var a = parseFloat(values[3] || 1),
-        r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
-        g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
-        b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
-    return "#" +
-      ("0" + r.toString(16)).slice(-2) +
-      ("0" + g.toString(16)).slice(-2) +
-      ("0" + b.toString(16)).slice(-2);
-  }
-var colorscaleValue = [];
-for (let i = 0; i < 10; i++) {
-    let tab = [];
-    let number = '0.' + i;
-    tab.push(parseFloat(number));
-    console.log(result._clusterColor);
-    tab.push(toColor(result._clusterColor[i].value));
-    colorscaleValue.push(tab);
-}
-colorscaleValue.push([1,
-    toColor(result._clusterColor[9].value)
-]);
-
-for(let i = 0; i < colorscaleValue.length; i++){
-    colorTabInput.push(hexify(colorscaleValue[i][1]));
-}
-console.log(colorscaleValue);
-for (let i = height; i > 0; i--) {
-    let tabTab = [];
-    for (let j = width; j > 0; j--) {
-        tabTab.push(result.clusterMap[i * height + j]);
-    }
-    newTab.push(tabTab);
-}
 console.log(newTab);
-var data = [{
-    z: newTab,
-    type: 'heatmap',
-    colorscale: colorscaleValue,
-}];
-if(document.querySelector('#myDiv')){
-    Plotly.newPlot('myDiv', data);
-}
+
 
 const tableCluster = document.querySelector('.divTable');
 if(tableCluster){

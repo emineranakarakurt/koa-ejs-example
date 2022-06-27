@@ -46,8 +46,8 @@ client.on('connect', function(connection) {
 
 });
 
-// client.connect("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
-client.connect("ws://127.0.0.1:8081");
+client.connect("ws://xu@vm-sdc-09.icube.unistra.fr:8081");
+// client.connect("ws://127.0.0.1:8081");
 
 
 app.use(mount('/favicon.ico',ctx => {

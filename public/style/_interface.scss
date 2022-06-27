@@ -158,7 +158,6 @@
     }
     .datapanel{
         width: 95%;
-        height: 100%;
         border: 2px solid $bleu-nuit;
         margin: 10px auto;
         border-radius: 20px;
@@ -303,6 +302,7 @@
         border-radius: 20px;
         &-content{
             padding: 5px;
+            justify-content: space-evenly;
         }
         .onglet{
             background-color: $bleu-nuit;
@@ -352,8 +352,11 @@
                         margin-bottom: 3vh;
                         #myDiv{
                             margin: 0 auto;
-                            height: calc(256px * 2.3);
-                            width: calc(219px * 2.3);
+                            width: calc(2 * 218px);
+                            height: calc(2* 255px);
+                            .xaxislayer-above, .yaxislayer-above{
+                                display: none;
+                            }
                         }
                     }
                 }

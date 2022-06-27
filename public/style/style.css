@@ -284,7 +284,6 @@
 
 .container-interface .datapanel {
   width: 95%;
-  height: 100%;
   border: 2px solid #030233;
   margin: 10px auto;
   border-radius: 20px;
@@ -444,6 +443,9 @@
 
 .container-interface .results-content {
   padding: 5px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .container-interface .results .onglet {
@@ -507,8 +509,12 @@
 
 .container-interface .results-col__left .stats-results__image #myDiv {
   margin: 0 auto;
-  height: calc(256px * 2.3);
-  width: calc(219px * 2.3);
+  width: calc(2 * 218px);
+  height: calc(2* 255px);
+}
+
+.container-interface .results-col__left .stats-results__image #myDiv .xaxislayer-above, .container-interface .results-col__left .stats-results__image #myDiv .yaxislayer-above {
+  display: none;
 }
 
 .container-interface .results-col__left .view-mode h3 {
@@ -1252,5 +1258,63 @@ input:focus + .slider {
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+#menu_checkbox {
+  display: none;
+}
+
+#menu_checkbox + label {
+  display: block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+#menu_checkbox + label div {
+  position: relative;
+  top: 0;
+  height: 7px;
+  background-color: #fff;
+  margin-bottom: 7px;
+  -webkit-transition: 0.3s ease transform, 0.3s ease top, 0.3s ease width, 0.3s ease right;
+  transition: 0.3s ease transform, 0.3s ease top, 0.3s ease width, 0.3s ease right;
+  border-radius: 2px;
+}
+
+#menu_checkbox + label div:first-child {
+  -webkit-transform-origin: 0;
+          transform-origin: 0;
+}
+
+#menu_checkbox + label div:last-child {
+  margin-bottom: 0;
+  -webkit-transform-origin: 35px;
+          transform-origin: 35px;
+}
+
+#menu_checkbox + label div:nth-child(2) {
+  right: 0;
+  width: 35px;
+}
+
+#menu_checkbox:checked + label div:first-child {
+  top: -3.5px;
+  -webkit-transform: rotateZ(45deg);
+          transform: rotateZ(45deg);
+}
+
+#menu_checkbox:checked + label div:last-child {
+  top: 3.5px;
+  -webkit-transform: rotateZ(45deg);
+          transform: rotateZ(45deg);
+}
+
+#menu_checkbox:checked + label div:nth-child(2) {
+  width: 52px;
+  top: 0;
+  right: 7px;
+  -webkit-transform: rotateZ(-45deg);
+          transform: rotateZ(-45deg);
 }
 /*# sourceMappingURL=style.css.map */
